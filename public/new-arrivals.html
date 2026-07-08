@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>New Arrival — Kancheepuram Suvarna Gold Silk Saree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ivory: #FAF6F0;
+  --cream: #F2EAD8;
+  --parchment: #E8DCCA;
+  --gold: #B8912A;
+  --gold-light: #D4A84B;
+  --gold-pale: #F0E0A8;
+  --deep-brown: #2C1A0E;
+  --warm-brown: #5C3A1E;
+  --text-dark: #1E1208;
+  --text-mid: #4A3020;
+  --text-muted: #8A7060;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ivory);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 3rem;
+  background: rgba(250,246,240,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 32px rgba(44,26,14,0.08);
+}
+.brand-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 60px;
+  overflow: hidden;
+  text-decoration: none;
+}
+.nav-logo {
+  width: 119px;
+  height: 119px;
+  display: block;
+  object-fit: contain;
+  transform: translateY(2px);
+  filter: brightness(1.1) contrast(1.1);
+}
+.nav-links { display: flex; gap: 2.4rem; list-style: none; }
+.nav-links a {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a:hover { color: var(--gold) !important; }
+
+/* ── PRODUCT CONTAINER ── */
+.product-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 8rem 2rem 5rem;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 3.5rem;
+}
+
+/* ── GALLERY (LEFT COLUMN) ── */
+.gallery-column {
+  display: flex;
+  gap: 1.2rem;
+  flex-direction: row;
+}
+.thumbnail-carousel-wrap {
+  width: 80px;
+  max-height: 520px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+}
+.thumbnail-carousel-wrap::-webkit-scrollbar {
+  width: 3px;
+}
+.thumbnail-carousel-wrap::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+.thumbnail-carousel-wrap::-webkit-scrollbar-thumb {
+  background: var(--parchment);
+  border-radius: 2px;
+}
+.thumbnail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.main-image-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+.main-image-viewport {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #fff;
+  border: 1px solid var(--parchment);
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(44,26,14,0.05);
+}
+.main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.main-image-viewport.switching .main-img {
+  opacity: 0.3;
+}
+.gallery-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem;
+}
+.nav-arrow {
+  background: none;
+  border: 1px solid var(--parchment);
+  color: var(--text-mid);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+.nav-arrow:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+.nav-arrow svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+.gallery-counter {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.thumb-card {
+  width: 72px;
+  aspect-ratio: 3/4;
+  border: 1px solid var(--parchment);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+.thumb-card.active, .thumb-card:hover {
+  opacity: 1;
+  border-color: var(--gold);
+  box-shadow: 0 4px 10px rgba(184, 145, 42, 0.15);
+}
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ── PRODUCT DETAILS (RIGHT COLUMN) ── */
+.details-column {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 7rem;
+  height: fit-content;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+.details-column::-webkit-scrollbar {
+  width: 4px;
+}
+.details-column::-webkit-scrollbar-thumb {
+  background: var(--parchment);
+  border-radius: 2px;
+}
+.breadcrumb {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+.product-tag {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.product-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.product-price {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.5rem;
+  color: var(--warm-brown);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+.product-desc {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 2.5rem;
+  font-style: italic;
+}
+
+/* Info Table */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2.5rem;
+}
+.spec-table tr {
+  border-bottom: 1px solid var(--parchment);
+}
+.spec-table td {
+  padding: 0.8rem 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+}
+.spec-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  width: 35%;
+}
+.spec-value {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* WhatsApp CTA */
+.whatsapp-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.1rem 2rem;
+  background: var(--gold);
+  color: #fff;
+  border: 1px solid var(--gold);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: var(--transition);
+  box-shadow: 0 8px 25px rgba(184, 145, 42, 0.25);
+  margin-bottom: 2rem;
+}
+.whatsapp-cta:hover {
+  background: var(--deep-brown);
+  border-color: var(--deep-brown);
+  box-shadow: none;
+}
+.whatsapp-cta svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Accordion sections */
+.details-accordion {
+  border-top: 1px solid var(--parchment);
+  margin-top: 1rem;
+}
+.accordion-item {
+  border-bottom: 1px solid var(--parchment);
+}
+.accordion-header {
+  width: 100%;
+  padding: 1.2rem 0;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  transition: var(--transition);
+}
+.accordion-header:hover {
+  color: var(--gold);
+}
+.accordion-icon {
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.accordion-content p {
+  padding-bottom: 1.2rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #1b0d07;
+  color: var(--ivory);
+  padding: 5rem 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 4rem;
+  border-bottom: 1px solid rgba(212,168,75,0.15);
+  padding-bottom: 3rem;
+}
+.footer-brand h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.footer-brand p {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  color: rgba(250,246,240,0.65);
+  line-height: 1.7;
+  font-style: italic;
+}
+.footer-links h4, .footer-contact h4 {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold-light);
+  margin-bottom: 1.5rem;
+}
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 0.8rem; }
+.footer-links a {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  color: rgba(250,246,240,0.7);
+  text-decoration: none;
+  font-style: italic;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold-light); }
+.footer-contact p {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem;
+  color: rgba(250,246,240,0.7);
+  font-style: italic;
+  margin-bottom: 0.8rem;
+}
+.footer-contact a {
+  color: var(--gold-light);
+  text-decoration: none;
+}
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(250,246,240,0.4);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 900px) {
+  .product-container { grid-template-columns: 1fr; gap: 3rem; padding-top: 7rem; }
+  .gallery-column { flex-direction: column-reverse; }
+  .thumbnail-carousel-wrap { width: 100%; max-height: none; overflow-x: auto; overflow-y: hidden; }
+  .thumbnail-grid { flex-direction: row; }
+  .main-image-viewport { height: 450px; }
+  .details-column { position: static; max-height: none; padding-right: 0; }
+  #navbar { padding: 0.6rem 1.5rem; }
+  .nav-links { display: none; }
+  .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="/" class="brand-link">
+    <img src="/pavana-logo.png" alt="Pavana Silks" class="nav-logo" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#collection">Collections</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN PRODUCT CONTAINER -->
+<main class="product-container">
+  
+  <!-- LEFT COLUMN - GALLERY -->
+  <section class="gallery-column">
+    <!-- Vertical Thumbnails -->
+    <div class="thumbnail-carousel-wrap">
+      <div class="thumbnail-grid" id="thumbGrid">
+        <!-- Generated Thumbnails -->
+      </div>
+    </div>
+    
+    <!-- Main Image Area -->
+    <div class="main-image-area">
+      <div class="main-image-viewport" id="mainImgViewport">
+        <img id="mainProductImg" src="/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg" alt="Kancheepuram Suvarna Gold Silk Saree" class="main-img" />
+      </div>
+      
+      <div class="gallery-navigation">
+        <button class="nav-arrow" onclick="prevImg(true)" aria-label="Previous image">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <span class="gallery-counter" id="galleryCounter">1 / 12</span>
+        <button class="nav-arrow" onclick="nextImg(true)" aria-label="Next image">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- RIGHT COLUMN - DETAILS -->
+  <section class="details-column">
+    <div class="breadcrumb">
+      <a href="/">Home</a> &nbsp;/&nbsp; <a href="/#collection">Collections</a> &nbsp;/&nbsp; New Arrival
+    </div>
+    
+    <p class="product-tag">Exclusive New Arrival</p>
+    <h1 class="product-title">Kancheepuram Suvarna Gold Silk Saree</h1>
+    <p class="product-price">Price on Enquiry</p>
+    
+    <p class="product-desc">
+      Handloomed with unparalleled precision, this Kanchipuram masterpiece features pure golden zari borders and classic motif weaves. The deep, rich texture of our premium silk and the brilliance of traditional gold brocade make it a true heirloom treasure, fresh from the loom.
+    </p>
+    
+    <table class="spec-table">
+      <tr>
+        <td class="spec-label">Material</td>
+        <td class="spec-value">Pure Mulberry Silk (Double Warp)</td>
+      </tr>
+      <tr>
+        <td class="spec-label">Zari Type</td>
+        <td class="spec-value">Genuine Gold & Silver Zari Brocade</td>
+      </tr>
+      <tr>
+        <td class="spec-label">Weave Craft</td>
+        <td class="spec-value">Korvai Handloom Weaving</td>
+      </tr>
+      <tr>
+        <td class="spec-label">Color</td>
+        <td class="spec-value">Suvarna Deep Crimson & Gold</td>
+      </tr>
+    </table>
+    
+    <a href="https://wa.me/917305252962?text=Hi%20Pavana%20Silks,%20I%20am%20interested%20in%20inquiring%20about%20the%20Kancheepuram%20Suvarna%20Gold%20Silk%20Saree%20New%20Arrival." target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+      <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.335 4.963L2 22l5.233-1.371a9.927 9.927 0 004.779 1.21h.005c5.505 0 9.99-4.478 9.99-9.985C22.007 6.478 17.521 2 12.012 2zm4.7 13.914c-.2.56-1.168 1.057-1.608 1.13-.43.07-.86.13-2.76-.62-2.43-.96-3.99-3.41-4.11-3.57-.12-.16-.97-1.29-.97-2.46 0-1.17.61-1.74.83-1.98.22-.24.49-.3.65-.3.16 0 .32 0 .46.01.15.01.35-.06.55.42.2.49.69 1.68.75 1.8.06.12.1.26.02.42-.08.17-.12.27-.24.41-.12.14-.26.32-.37.43-.12.12-.25.25-.11.49.14.24.63 1.03 1.35 1.67.92.82 1.7 1.07 1.94 1.19.24.12.38.1.52-.06.14-.17.61-.71.77-.96.16-.24.32-.2.53-.12.21.08 1.35.63 1.58.75.23.12.38.18.44.28.06.1.06.58-.14 1.14z"/></svg>
+      Enquire via WhatsApp
+    </a>
+    
+    <div class="details-accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Saree Details & Care
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <p>
+            This saree is made from 100% pure Mulberry silk, double-warped for a full-bodied texture. To maintain its natural sheen and gold embroidery quality: dry clean only, avoid direct sunlight when storing, and store wrapped in light muslin cloth.
+          </p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Craftsmanship & Heritage
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <p>
+            Korvai is a traditional south Indian handloom weaving technique where the body and the border are woven separately and then joined together by a skilled artisan using a locking pattern. The process is labor-intensive and results in borders that do not slip or tear.
+          </p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Shipping & Personal Styling
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content">
+          <p>
+            We offer complimentary secure shipping worldwide. For customized blouse stitching, matching accessories or a personal video call consultation before order, please get in touch with our style desk on WhatsApp.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Pavana Silks</h3>
+      <p>Grace in every weave. Bringing together premium textures and timeless traditional handlooms directly to you.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Runway</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#collection">Collections</a></li>
+        <li><a href="/#about">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Atelier</h4>
+      <p>Styling Desk: <a href="tel:+917305252962">+91 73052 52962</a></p>
+      <p>Enquiries: <a href="mailto:hello@pavanasilks.com">hello@pavanasilks.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Pavana Silks. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// Array of all 12 detail images for this single saree
+const images = [
+  "/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.52.37 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.52.41 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.52.45 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.52.48 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.52.51 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.53.51 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.53.52 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.53.53 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.56.58 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.57.08 PM.jpeg",
+  "/saree images/WhatsApp Image 2026-07-07 at 1.57.57 PM.jpeg"
+];
+
+let currentIndex = 0;
+let slideInterval = null;
+const mainProductImg = document.getElementById('mainProductImg');
+const mainImgViewport = document.getElementById('mainImgViewport');
+const galleryCounter = document.getElementById('galleryCounter');
+const thumbGrid = document.getElementById('thumbGrid');
+
+// Build Thumbnail List Dynamically
+function initGallery() {
+  thumbGrid.innerHTML = '';
+  images.forEach((imgSrc, idx) => {
+    const thumb = document.createElement('div');
+    thumb.className = `thumb-card ${idx === 0 ? 'active' : ''}`;
+    thumb.innerHTML = `<img src="${imgSrc}" class="thumb-img" alt="Detail view ${idx + 1}" />`;
+    thumb.onclick = () => selectImg(idx, true);
+    thumbGrid.appendChild(thumb);
+  });
+  updateGalleryStatus();
+}
+
+function startAutoSlide() {
+  stopAutoSlide();
+  slideInterval = setInterval(() => {
+    nextImg(false);
+  }, 3000);
+}
+
+function stopAutoSlide() {
+  if (slideInterval) {
+    clearInterval(slideInterval);
+  }
+}
+
+function selectImg(idx, isManual = false) {
+  if (isManual) {
+    stopAutoSlide();
+    startAutoSlide();
+  }
+  currentIndex = idx;
+  mainImgViewport.classList.add('switching');
+  
+  setTimeout(() => {
+    mainProductImg.src = images[currentIndex];
+    mainImgViewport.classList.remove('switching');
+    updateGalleryStatus();
+  }, 150);
+}
+
+function nextImg(isManual = false) {
+  let nextIdx = currentIndex + 1;
+  if (nextIdx >= images.length) nextIdx = 0;
+  selectImg(nextIdx, isManual);
+}
+
+function prevImg(isManual = false) {
+  let prevIdx = currentIndex - 1;
+  if (prevIdx < 0) prevIdx = images.length - 1;
+  selectImg(prevIdx, isManual);
+}
+
+function updateGalleryStatus() {
+  // Update counter
+  galleryCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+  
+  // Highlight active thumbnail
+  const thumbs = thumbGrid.querySelectorAll('.thumb-card');
+  thumbs.forEach((thumb, idx) => {
+    if (idx === currentIndex) {
+      thumb.classList.add('active');
+      // Scroll thumb into view
+      thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    } else {
+      thumb.classList.remove('active');
+    }
+  });
+}
+
+// Accordion Toggles
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const icon = btn.querySelector('.accordion-icon');
+  
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+    icon.textContent = '+';
+  } else {
+    // Close other items
+    document.querySelectorAll('.accordion-content').forEach(item => item.style.maxHeight = null);
+    document.querySelectorAll('.accordion-icon').forEach(item => item.textContent = '+');
+    
+    content.style.maxHeight = content.scrollHeight + 'px';
+    icon.textContent = '-';
+  }
+}
+
+// Initialize gallery on load
+initGallery();
+startAutoSlide();
+</script>
+</body>
+</html>
