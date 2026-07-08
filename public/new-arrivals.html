@@ -455,13 +455,18 @@ footer {
 }
 
 @media (max-width: 900px) {
-  .product-container { grid-template-columns: 1fr; gap: 3rem; padding-top: 7rem; }
-  .gallery-column { flex-direction: column-reverse; }
-  .thumbnail-carousel-wrap { width: 100%; max-height: none; overflow-x: auto; overflow-y: hidden; }
-  .thumbnail-grid { flex-direction: row; }
-  .main-image-viewport { height: 450px; }
+  .product-container { grid-template-columns: 1fr; gap: 2.5rem; padding: 7rem 1.2rem 3rem; }
+  .gallery-column { flex-direction: column-reverse; gap: 0.8rem; }
+  .thumbnail-carousel-wrap { width: 100%; max-height: none; overflow-x: auto; overflow-y: hidden; padding-bottom: 0.2rem; }
+  .thumbnail-grid { flex-direction: row; gap: 0.6rem; }
+  .thumb-card { width: 60px; }
+  .main-image-viewport { height: 420px; }
   .details-column { position: static; max-height: none; padding-right: 0; }
-  #navbar { padding: 0.6rem 1.5rem; }
+  .product-title { font-size: 1.8rem; margin-bottom: 0.8rem; }
+  .product-price { margin-bottom: 1.2rem; }
+  .product-desc { margin-bottom: 1.8rem; }
+  .spec-table { margin-bottom: 1.8rem; }
+  #navbar { padding: 0.6rem 1.2rem; }
   .nav-links { display: none; }
   .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
 }
