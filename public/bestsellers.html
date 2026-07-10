@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bestsellers — Pavana Silks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ivory: #FAF6F0;
+  --cream: #F2EAD8;
+  --parchment: #E8DCCA;
+  --gold: #B8912A;
+  --gold-light: #D4A84B;
+  --gold-pale: #F0E0A8;
+  --deep-brown: #2C1A0E;
+  --warm-brown: #5C3A1E;
+  --text-dark: #1E1208;
+  --text-mid: #4A3020;
+  --text-muted: #8A7060;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ivory);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 3rem;
+  background: rgba(250,246,240,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 32px rgba(44,26,14,0.08);
+}
+.brand-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 60px;
+  overflow: hidden;
+  text-decoration: none;
+}
+.nav-logo {
+  width: 119px;
+  height: 119px;
+  display: block;
+  object-fit: contain;
+  transform: translateY(2px);
+  filter: brightness(1.1) contrast(1.1);
+}
+.nav-links { display: flex; gap: 2.4rem; list-style: none; }
+.nav-links a {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a:hover { color: var(--gold) !important; }
+
+/* ── CATALOG CONTAINER ── */
+.catalog-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 12rem 2rem 10rem;
+  text-align: center;
+}
+.catalog-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.catalog-header p {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.catalog-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+.catalog-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 1.5rem auto;
+}
+.coming-soon-msg {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.btn-back-home {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.btn-back-home:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #1b0d07;
+  color: var(--ivory);
+  padding: 5rem 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 4rem;
+  border-bottom: 1px solid rgba(212,168,75,0.15);
+  padding-bottom: 3rem;
+}
+.footer-brand h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.footer-brand p {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  color: rgba(250,246,240,0.65);
+  line-height: 1.7;
+  font-style: italic;
+}
+.footer-links h4, .footer-contact h4 {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold-light);
+  margin-bottom: 1.5rem;
+}
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 0.8rem; }
+.footer-links a {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  color: rgba(250,246,240,0.7);
+  text-decoration: none;
+  font-style: italic;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold-light); }
+.footer-contact p {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem;
+  color: rgba(250,246,240,0.7);
+  font-style: italic;
+  margin-bottom: 0.8rem;
+}
+.footer-contact a {
+  color: var(--gold-light);
+  text-decoration: none;
+}
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(250,246,240,0.4);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 900px) {
+  #navbar { padding: 0.6rem 1.2rem; }
+  .nav-links { display: none; }
+  .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+  .catalog-container { padding: 9rem 1.2rem 6rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="/" class="brand-link">
+    <img src="/pavana-logo.png" alt="Pavana Silks" class="nav-logo" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#collection">Collections</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- CATALOG VIEW -->
+<div class="catalog-container">
+  <div class="catalog-header">
+    <p>Curated Weaves</p>
+    <h1>Bestsellers</h1>
+    <div class="catalog-divider"></div>
+  </div>
+  
+  <p class="coming-soon-msg">We are currently curating this collection. Please check back soon for our bestseller releases.</p>
+  
+  <a href="/" class="btn-back-home">Back to Home</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Pavana Silks</h3>
+      <p>Grace in every weave. Bringing together premium textures and timeless traditional handlooms directly to you.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Runway</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#collection">Collections</a></li>
+        <li><a href="/#about">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Atelier</h4>
+      <p>Styling Desk: <a href="tel:+917305252962">+91 73052 52962</a></p>
+      <p>Enquiries: <a href="mailto:hello@pavanasilks.com">hello@pavanasilks.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Pavana Silks. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

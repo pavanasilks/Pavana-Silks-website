@@ -11,6 +11,21 @@ app.get('/new-arrivals', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'new-arrivals.html'));
 });
 
+// Route for Bestsellers page
+app.get('/bestsellers', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'bestsellers.html'));
+});
+
+// Route for Traditional page
+app.get('/traditional', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'traditional.html'));
+});
+
+// Route for Limited page
+app.get('/limited', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'limited.html'));
+});
+
 // Catch-all route to serve index.html for any other requests (SPA friendly)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

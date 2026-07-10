@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>New Arrival — Kancheepuram Suvarna Gold Silk Saree</title>
+<title>New Arrivals — Pavana Silks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -89,6 +89,151 @@ body {
 .nav-links a:hover::after { transform: scaleX(1); }
 .nav-links a:hover { color: var(--gold) !important; }
 
+/* ── CATALOG CONTAINER ── */
+.catalog-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 8rem 2rem 5rem;
+  animation: fadeIn 0.6s ease forwards;
+}
+.btn-back-home {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: var(--transition);
+  border-radius: 2px;
+}
+.btn-back-home:hover {
+  background: var(--gold);
+  color: #fff;
+}
+.catalog-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.catalog-header p {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.catalog-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+.catalog-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 1.5rem auto;
+}
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+.catalog-card {
+  background: #fff;
+  border: 1px solid var(--parchment);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(44,26,14,0.03);
+}
+.catalog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(44,26,14,0.08);
+  border-color: var(--gold);
+}
+.catalog-img-wrap {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+  background-color: #f7f7f7;
+}
+.catalog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.catalog-card:hover .catalog-img {
+  transform: scale(1.05);
+}
+.catalog-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--gold);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+  border-radius: 2px;
+  box-shadow: 0 4px 10px rgba(184, 145, 42, 0.2);
+}
+.catalog-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.catalog-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+.catalog-price {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--warm-brown);
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+.catalog-action {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.catalog-action svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+  transition: transform 0.3s;
+}
+.catalog-card:hover .catalog-action svg {
+  transform: translateX(4px);
+}
+
 /* ── PRODUCT CONTAINER ── */
 .product-container {
   max-width: 1300px;
@@ -97,6 +242,12 @@ body {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   gap: 3.5rem;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ── GALLERY (LEFT COLUMN) ── */
@@ -472,6 +623,7 @@ footer {
   #navbar { padding: 0.6rem 1.2rem; }
   .nav-links { display: none; }
   .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+  .catalog-container { padding: 7rem 1.2rem 3rem; }
 }
 </style>
 </head>
@@ -490,112 +642,119 @@ footer {
   </ul>
 </nav>
 
-<!-- MAIN PRODUCT CONTAINER -->
-<main class="product-container">
+<!-- CATALOG VIEW -->
+<div id="catalogView" class="catalog-container">
+  <div class="catalog-header">
+    <p>Curated Weaves</p>
+    <h1>New Arrivals</h1>
+    <div class="catalog-divider"></div>
+  </div>
   
-  <!-- LEFT COLUMN - GALLERY -->
-  <section class="gallery-column">
-    <!-- Vertical Thumbnails -->
-    <div class="thumbnail-carousel-wrap">
-      <div class="thumbnail-grid" id="thumbGrid">
-        <!-- Generated Thumbnails -->
-      </div>
-    </div>
-    
-    <!-- Main Image Area -->
-    <div class="main-image-area">
-      <div class="main-image-viewport" id="mainImgViewport">
-        <img id="mainProductImg" src="/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg" alt="Kancheepuram Suvarna Gold Silk Saree" class="main-img" />
+  <div class="catalog-grid" id="catalogGrid">
+    <!-- Generated Dynamically -->
+  </div>
+  <div style="text-align: center; margin-top: 4rem;">
+    <a href="/#collection" class="btn-back-home">Back to Collections</a>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL VIEW -->
+<div id="productDetailView" style="display: none;">
+  <main class="product-container">
+    <!-- LEFT COLUMN - GALLERY -->
+    <section class="gallery-column">
+      <!-- Vertical Thumbnails -->
+      <div class="thumbnail-carousel-wrap">
+        <div class="thumbnail-grid" id="thumbGrid">
+          <!-- Generated Thumbnails -->
+        </div>
       </div>
       
-      <div class="gallery-navigation">
-        <button class="nav-arrow" onclick="prevImg(true)" aria-label="Previous image">
-          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        </button>
-        <span class="gallery-counter" id="galleryCounter">1 / 12</span>
-        <button class="nav-arrow" onclick="nextImg(true)" aria-label="Next image">
-          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
-  
-  <!-- RIGHT COLUMN - DETAILS -->
-  <section class="details-column">
-    <div class="breadcrumb">
-      <a href="/">Home</a> &nbsp;/&nbsp; <a href="/#collection">Collections</a> &nbsp;/&nbsp; New Arrival
-    </div>
-    
-    <p class="product-tag">Exclusive New Arrival</p>
-    <h1 class="product-title">Kancheepuram Suvarna Gold Silk Saree</h1>
-    <p class="product-price">Price on Enquiry</p>
-    
-    <p class="product-desc">
-      Handloomed with unparalleled precision, this Kanchipuram masterpiece features pure golden zari borders and classic motif weaves. The deep, rich texture of our premium silk and the brilliance of traditional gold brocade make it a true heirloom treasure, fresh from the loom.
-    </p>
-    
-    <table class="spec-table">
-      <tr>
-        <td class="spec-label">Material</td>
-        <td class="spec-value">Pure Mulberry Silk (Double Warp)</td>
-      </tr>
-      <tr>
-        <td class="spec-label">Zari Type</td>
-        <td class="spec-value">Genuine Gold & Silver Zari Brocade</td>
-      </tr>
-      <tr>
-        <td class="spec-label">Weave Craft</td>
-        <td class="spec-value">Korvai Handloom Weaving</td>
-      </tr>
-      <tr>
-        <td class="spec-label">Color</td>
-        <td class="spec-value">Suvarna Deep Crimson & Gold</td>
-      </tr>
-    </table>
-    
-    <a href="https://wa.me/917305252962?text=Hi%20Pavana%20Silks,%20I%20am%20interested%20in%20inquiring%20about%20the%20Kancheepuram%20Suvarna%20Gold%20Silk%20Saree%20New%20Arrival." target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
-      <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.335 4.963L2 22l5.233-1.371a9.927 9.927 0 004.779 1.21h.005c5.505 0 9.99-4.478 9.99-9.985C22.007 6.478 17.521 2 12.012 2zm4.7 13.914c-.2.56-1.168 1.057-1.608 1.13-.43.07-.86.13-2.76-.62-2.43-.96-3.99-3.41-4.11-3.57-.12-.16-.97-1.29-.97-2.46 0-1.17.61-1.74.83-1.98.22-.24.49-.3.65-.3.16 0 .32 0 .46.01.15.01.35-.06.55.42.2.49.69 1.68.75 1.8.06.12.1.26.02.42-.08.17-.12.27-.24.41-.12.14-.26.32-.37.43-.12.12-.25.25-.11.49.14.24.63 1.03 1.35 1.67.92.82 1.7 1.07 1.94 1.19.24.12.38.1.52-.06.14-.17.61-.71.77-.96.16-.24.32-.2.53-.12.21.08 1.35.63 1.58.75.23.12.38.18.44.28.06.1.06.58-.14 1.14z"/></svg>
-      Enquire via WhatsApp
-    </a>
-    
-    <div class="details-accordion">
-      <div class="accordion-item">
-        <button class="accordion-header" onclick="toggleAccordion(this)">
-          Saree Details & Care
-          <span class="accordion-icon">+</span>
-        </button>
-        <div class="accordion-content">
-          <p>
-            This saree is made from 100% pure Mulberry silk, double-warped for a full-bodied texture. To maintain its natural sheen and gold embroidery quality: dry clean only, avoid direct sunlight when storing, and store wrapped in light muslin cloth.
-          </p>
+      <!-- Main Image Area -->
+      <div class="main-image-area">
+        <div class="main-image-viewport" id="mainImgViewport">
+          <img id="mainProductImg" src="" alt="" class="main-img" />
+        </div>
+        
+        <div class="gallery-navigation">
+          <button class="nav-arrow" onclick="prevImg(true)" aria-label="Previous image">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/></svg>
+          </button>
+          <span class="gallery-counter" id="galleryCounter">1 / 1</span>
+          <button class="nav-arrow" onclick="nextImg(true)" aria-label="Next image">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/></svg>
+          </button>
         </div>
       </div>
-      <div class="accordion-item">
-        <button class="accordion-header" onclick="toggleAccordion(this)">
-          Craftsmanship & Heritage
-          <span class="accordion-icon">+</span>
-        </button>
-        <div class="accordion-content">
-          <p>
-            Korvai is a traditional south Indian handloom weaving technique where the body and the border are woven separately and then joined together by a skilled artisan using a locking pattern. The process is labor-intensive and results in borders that do not slip or tear.
-          </p>
+    </section>
+    
+    <!-- RIGHT COLUMN - DETAILS -->
+    <section class="details-column">
+      <a href="javascript:void(0)" onclick="showCatalog()" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--gold); font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--gold)'">
+        <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Collections
+      </a>
+      
+      <div class="breadcrumb">
+        <a href="/">Home</a> &nbsp;/&nbsp; <a href="javascript:void(0)" onclick="showCatalog()">Collections</a> &nbsp;/&nbsp; <span id="breadcrumbTitle">Saree</span>
+      </div>
+      
+      <p class="product-tag" id="detailBadge">Saree</p>
+      <h1 class="product-title" id="detailTitle">Kancheepuram Saree</h1>
+      <p class="product-price" id="detailPrice">Price on Enquiry</p>
+      
+      <p class="product-desc" id="detailDesc"></p>
+      
+      <table class="spec-table" id="specTable">
+        <!-- Dynamically Generated Specs -->
+      </table>
+      
+      <a href="" id="whatsappLink" target="_blank" rel="noopener noreferrer" class="whatsapp-cta" style="margin-bottom: 1rem;">
+        <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.335 4.963L2 22l5.233-1.371a9.927 9.927 0 004.779 1.21h.005c5.505 0 9.99-4.478 9.99-9.985C22.007 6.478 17.521 2 12.012 2zm4.7 13.914c-.2.56-1.168 1.057-1.608 1.13-.43.07-.86.13-2.76-.62-2.43-.96-3.99-3.41-4.11-3.57-.12-.16-.97-1.29-.97-2.46 0-1.17.61-1.74.83-1.98.22-.24.49-.3.65-.3.16 0 .32 0 .46.01.15.01.35-.06.55.42.2.49.69 1.68.75 1.8.06.12.1.26.02.42-.08.17-.12.27-.24.41-.12.14-.26.32-.37.43-.12.12-.25.25-.11.49.14.24.63 1.03 1.35 1.67.92.82 1.7 1.07 1.94 1.19.24.12.38.1.52-.06.14-.17.61-.71.77-.96.16-.24.32-.2.53-.12.21.08 1.35.63 1.58.75.23.12.38.18.44.28.06.1.06.58-.14 1.14z"/></svg>
+        Enquire via WhatsApp
+      </a>
+      <a href="javascript:void(0)" onclick="showCatalog()" class="whatsapp-cta" style="background: none; color: var(--gold); border: 1px solid var(--gold); box-shadow: none; margin-bottom: 2rem;">
+        Back to Collections
+      </a>
+      
+      <div class="details-accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Saree Details & Care
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content">
+            <p>
+              This saree is made from 100% pure Mulberry silk, double-warped for a full-bodied texture. To maintain its natural sheen and gold embroidery quality: dry clean only, avoid direct sunlight when storing, and store wrapped in light muslin cloth.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Craftsmanship & Heritage
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content">
+            <p>
+              Korvai is a traditional south Indian handloom weaving technique where the body and the border are woven separately and then joined together by a skilled artisan using a locking pattern. The process is labor-intensive and results in borders that do not slip or tear.
+            </p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Shipping & Personal Styling
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content">
+            <p>
+              We offer complimentary secure shipping worldwide. For customized blouse stitching, matching accessories or a personal video call consultation before order, please get in touch with our style desk on WhatsApp.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <button class="accordion-header" onclick="toggleAccordion(this)">
-          Shipping & Personal Styling
-          <span class="accordion-icon">+</span>
-        </button>
-        <div class="accordion-content">
-          <p>
-            We offer complimentary secure shipping worldwide. For customized blouse stitching, matching accessories or a personal video call consultation before order, please get in touch with our style desk on WhatsApp.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-</main>
+    </section>
+  </main>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -624,33 +783,147 @@ footer {
 </footer>
 
 <script>
-// Array of all 12 detail images for this single saree
-const images = [
-  "/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.52.37 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.52.41 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.52.45 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.52.48 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.52.51 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.53.51 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.53.52 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.53.53 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.56.58 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.57.08 PM.jpeg",
-  "/saree images/WhatsApp Image 2026-07-07 at 1.57.57 PM.jpeg"
+// Catalog products
+const products = [
+  {
+    id: "kancheepuram-gold",
+    title: "Kancheepuram Suvarna Gold Silk Saree",
+    badge: "New Arrival",
+    price: "Price on Enquiry",
+    desc: "Handloomed with unparalleled precision, this Kanchipuram masterpiece features pure golden zari borders and classic motif weaves. The deep, rich texture of our premium silk and the brilliance of traditional gold brocade make it a true heirloom treasure, fresh from the loom.",
+    images: [
+      "/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.52.37 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.52.41 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.52.45 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.52.48 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.52.51 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.53.51 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.53.52 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.53.53 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.56.58 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.57.08 PM.jpeg",
+      "/saree images/WhatsApp Image 2026-07-07 at 1.57.57 PM.jpeg"
+    ],
+    specs: {
+      "Material": "Pure Mulberry Silk (Double Warp)",
+      "Zari Type": "Genuine Gold & Silver Zari Brocade",
+      "Weave Craft": "Korvai Handloom Weaving",
+      "Color": "Suvarna Deep Crimson & Gold"
+    },
+    whatsappText: "Hi Pavana Silks, I am interested in inquiring about the Kancheepuram Suvarna Gold Silk Saree."
+  }
 ];
 
+let activeImages = [];
 let currentIndex = 0;
 let slideInterval = null;
+
+const catalogView = document.getElementById('catalogView');
+const productDetailView = document.getElementById('productDetailView');
+const catalogGrid = document.getElementById('catalogGrid');
+
 const mainProductImg = document.getElementById('mainProductImg');
 const mainImgViewport = document.getElementById('mainImgViewport');
 const galleryCounter = document.getElementById('galleryCounter');
 const thumbGrid = document.getElementById('thumbGrid');
 
-// Build Thumbnail List Dynamically
+const detailBadge = document.getElementById('detailBadge');
+const detailTitle = document.getElementById('detailTitle');
+const detailPrice = document.getElementById('detailPrice');
+const detailDesc = document.getElementById('detailDesc');
+const specTable = document.getElementById('specTable');
+const whatsappLink = document.getElementById('whatsappLink');
+const breadcrumbTitle = document.getElementById('breadcrumbTitle');
+
+// Build Catalog Grid dynamically
+function initCatalog() {
+  catalogGrid.innerHTML = '';
+  // Only display products with "New Arrival" badge
+  const newArrivals = products.filter(p => p.badge === "New Arrival");
+  newArrivals.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'catalog-card';
+    card.onclick = () => {
+      window.location.hash = p.id;
+    };
+    
+    card.innerHTML = `
+      <div class="catalog-img-wrap">
+        <span class="catalog-badge">${p.badge}</span>
+        <img class="catalog-img" src="${p.images[0]}" alt="${p.title}" />
+      </div>
+      <div class="catalog-info">
+        <h3 class="catalog-title">${p.title}</h3>
+        <p class="catalog-price">${p.price}</p>
+        <span class="catalog-action">
+          View details
+          <svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    `;
+    catalogGrid.appendChild(card);
+  });
+}
+
+function showCatalog() {
+  stopAutoSlide();
+  productDetailView.style.display = 'none';
+  catalogView.style.display = 'block';
+  document.title = "New Arrivals — Pavana Silks";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (window.location.hash) {
+    history.pushState("", document.title, window.location.pathname + window.location.search);
+  }
+}
+
+function showProduct(id, isManual = false) {
+  const p = products.find(prod => prod.id === id);
+  if (!p) {
+    showCatalog();
+    return;
+  }
+  
+  catalogView.style.display = 'none';
+  productDetailView.style.display = 'block';
+  
+  document.title = p.title + " — Pavana Silks";
+  if (isManual) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Populate info
+  detailTitle.textContent = p.title;
+  breadcrumbTitle.textContent = p.title;
+  detailBadge.textContent = p.badge;
+  detailPrice.textContent = p.price;
+  detailDesc.textContent = p.desc;
+  
+  whatsappLink.href = `https://wa.me/917305252962?text=${encodeURIComponent(p.whatsappText)}`;
+  
+  // Populate Specs
+  specTable.innerHTML = '';
+  for (const [key, value] of Object.entries(p.specs)) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="spec-label">${key}</td>
+      <td class="spec-value">${value}</td>
+    `;
+    specTable.appendChild(row);
+  }
+  
+  // Populate Gallery
+  activeImages = p.images;
+  currentIndex = 0;
+  
+  initGallery();
+  startAutoSlide();
+}
+
+// Build Detail Gallery List
 function initGallery() {
   thumbGrid.innerHTML = '';
-  images.forEach((imgSrc, idx) => {
+  activeImages.forEach((imgSrc, idx) => {
     const thumb = document.createElement('div');
     thumb.className = `thumb-card ${idx === 0 ? 'active' : ''}`;
     thumb.innerHTML = `<img src="${imgSrc}" class="thumb-img" alt="Detail view ${idx + 1}" />`;
@@ -660,11 +933,14 @@ function initGallery() {
   updateGalleryStatus();
 }
 
+// Gallery Carousel control
 function startAutoSlide() {
   stopAutoSlide();
-  slideInterval = setInterval(() => {
-    nextImg(false);
-  }, 3000);
+  if (activeImages.length > 1) {
+    slideInterval = setInterval(() => {
+      nextImg(false);
+    }, 3000);
+  }
 }
 
 function stopAutoSlide() {
@@ -682,7 +958,8 @@ function selectImg(idx, isManual = false) {
   mainImgViewport.classList.add('switching');
   
   setTimeout(() => {
-    mainProductImg.src = images[currentIndex];
+    mainProductImg.src = activeImages[currentIndex];
+    mainProductImg.alt = detailTitle.textContent + ` - Detail View ${currentIndex + 1}`;
     mainImgViewport.classList.remove('switching');
     updateGalleryStatus();
   }, 150);
@@ -690,19 +967,20 @@ function selectImg(idx, isManual = false) {
 
 function nextImg(isManual = false) {
   let nextIdx = currentIndex + 1;
-  if (nextIdx >= images.length) nextIdx = 0;
+  if (nextIdx >= activeImages.length) nextIdx = 0;
   selectImg(nextIdx, isManual);
 }
 
 function prevImg(isManual = false) {
   let prevIdx = currentIndex - 1;
-  if (prevIdx < 0) prevIdx = images.length - 1;
+  if (prevIdx < 0) prevIdx = activeImages.length - 1;
   selectImg(prevIdx, isManual);
 }
 
 function updateGalleryStatus() {
   // Update counter
-  galleryCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+  galleryCounter.textContent = `${currentIndex + 1} / ${activeImages.length}`;
+  mainProductImg.src = activeImages[currentIndex];
   
   // Highlight active thumbnail
   const thumbs = thumbGrid.querySelectorAll('.thumb-card');
@@ -735,9 +1013,22 @@ function toggleAccordion(btn) {
   }
 }
 
-// Initialize gallery on load
-initGallery();
-startAutoSlide();
+// Router/Hash Change Handler
+function handleRouting() {
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    showProduct(hash, true);
+  } else {
+    showCatalog();
+  }
+}
+
+// Initialize Page
+initCatalog();
+window.addEventListener('hashchange', handleRouting);
+// On Load Routing
+handleRouting();
+
 </script>
 </body>
 </html>
