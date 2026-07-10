@@ -2426,6 +2426,24 @@ footer::before {
   </style>
 
   <script>
+    window.handleBotCollectionClick = function(collectionType) {
+      toggleChatbot();
+      const colSection = document.getElementById('collection');
+      if (colSection) {
+        colSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      
+      if (collectionType === 'new_arrivals') {
+        if (typeof showNewArrivals === 'function') showNewArrivals();
+      } else if (collectionType === 'bestsellers') {
+        if (typeof showComingSoon === 'function') showComingSoon('Pink Bridal Silk Collection');
+      } else if (collectionType === 'traditional') {
+        if (typeof showComingSoon === 'function') showComingSoon('Traditional Weaves Collection');
+      } else if (collectionType === 'limited') {
+        if (typeof showComingSoon === 'function') showComingSoon('Limited Edition Collection');
+      }
+    };
+
     window.toggleChatbot = function() {
       const win = document.getElementById('chatbot-window');
       if (win.style.display === 'none' || !win.style.display) {
@@ -2445,7 +2463,13 @@ footer::before {
         replyText = "Currently, we have **1** exclusive master-weave available for purchase: the **Kancheepuram Suvarna Gold Silk Saree** in our *New Arrivals* collection. More drapes are currently on the handlooms!";
       } else if (option === 'collections') {
         questionText = "What collections are available?";
-        replyText = "We feature four signature collections:\n• **New Arrivals** (In Stock)\n• **Bestsellers** (Coming Soon)\n• **Traditional Handlooms** (Coming Soon)\n• **Limited Edition** (Coming Soon)";
+        replyText = "We feature four signature collections. Click a collection to view it directly:\n\n" +
+                    "<div style='display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem;'>" +
+                    "  <button onclick='handleBotCollectionClick(\"new_arrivals\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>New Arrivals (In Stock)</button>" +
+                    "  <button onclick='handleBotCollectionClick(\"bestsellers\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Bestsellers (Coming Soon)</button>" +
+                    "  <button onclick='handleBotCollectionClick(\"traditional\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Traditional Handlooms (Coming Soon)</button>" +
+                    "  <button onclick='handleBotCollectionClick(\"limited\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Limited Edition (Coming Soon)</button>" +
+                    "</div>";
       } else if (option === 'stock') {
         questionText = "Are any sarees out of stock?";
         replyText = "Yes. Currently, all sarees in our **Bestsellers**, **Traditional Handlooms**, and **Limited Edition** collections are out of stock. \n\nOnly the **Kancheepuram Suvarna Gold Silk Saree** (New Arrivals) is currently in stock and available for checkout!";
@@ -2476,7 +2500,13 @@ footer::before {
         if (clean.includes('how many') || clean.includes('saree') || clean.includes('item') || clean.includes('product') || clean.includes('total')) {
           reply = "Currently, we have **1** exclusive drape available in stock: the **Kancheepuram Suvarna Gold Silk Saree**. Other designer sarees are currently in production on our handlooms!";
         } else if (clean.includes('collection') || clean.includes('category') || clean.includes('type')) {
-          reply = "We offer 4 key collections: **New Arrivals** (In Stock), **Bestsellers** (Coming Soon), **Traditional Handlooms** (Coming Soon), and **Limited Edition** (Coming Soon).";
+          reply = "We offer 4 key collections. Click a collection to view it directly:\n\n" +
+                  "<div style='display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem;'>" +
+                  "  <button onclick='handleBotCollectionClick(\"new_arrivals\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>New Arrivals (In Stock)</button>" +
+                  "  <button onclick='handleBotCollectionClick(\"bestsellers\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Bestsellers (Coming Soon)</button>" +
+                  "  <button onclick='handleBotCollectionClick(\"traditional\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Traditional Handlooms (Coming Soon)</button>" +
+                  "  <button onclick='handleBotCollectionClick(\"limited\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Limited Edition (Coming Soon)</button>" +
+                  "</div>";
         } else if (clean.includes('stock') || clean.includes('available') || clean.includes('out of stock') || clean.includes('coming soon')) {
           reply = "Our **Bestsellers**, **Traditional**, and **Limited** collections are currently out of stock (coming soon!). Only the **Kancheepuram Suvarna Gold Silk Saree** in *New Arrivals* is in stock.";
         } else if (clean.includes('care') || clean.includes('wash') || clean.includes('clean') || clean.includes('store')) {
