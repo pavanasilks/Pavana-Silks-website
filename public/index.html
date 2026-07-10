@@ -1595,6 +1595,8 @@ footer::before {
 
   function hideLoader() {
     if (loaderEl) loaderEl.classList.add('hidden');
+    var chatbot = document.getElementById('chatbot-container');
+    if (chatbot) chatbot.style.display = 'block';
   }
 
   function startAfterLoaderDelay() {
@@ -2372,7 +2374,7 @@ footer::before {
   <div id="cart-backdrop" onclick="toggleCart()" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(28,26,24,0.4); backdrop-filter: blur(4px); z-index: 15500; animation: fadeIn 0.3s ease;"></div>
 
   <!-- DYNAMIC CHATBOT WIDGET -->
-  <div id="chatbot-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 14000; font-family: 'Jost', sans-serif;">
+  <div id="chatbot-container" style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 14000; font-family: 'Jost', sans-serif;">
     <!-- Chat Bubble Button -->
     <button onclick="toggleChatbot()" id="chatbot-bubble" style="background: var(--gold, #B8912A); border: none; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(44,26,14,0.3); transition: all 0.3s ease; color: #fff;">
       <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
