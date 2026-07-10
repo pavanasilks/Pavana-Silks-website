@@ -780,7 +780,7 @@ footer {
     </div>
     <div class="footer-contact">
       <h4>Atelier</h4>
-      <p>Styling Desk: <a href="tel:+917305252962">+91 73052 52962</a></p>
+      <p>Styling Desk: <a href="tel:+918667570740">+91 86675 70740</a></p>
       <p>Enquiries: <a href="mailto:hello@pavanasilks.com">hello@pavanasilks.com</a></p>
     </div>
   </div>
@@ -906,7 +906,7 @@ function showProduct(id, isManual = false) {
   detailPrice.textContent = p.price;
   detailDesc.textContent = p.desc;
   
-  whatsappLink.href = `https://wa.me/917305252962?text=${encodeURIComponent(p.whatsappText)}`;
+  whatsappLink.href = `https://wa.me/918667570740?text=${encodeURIComponent(p.whatsappText)}`;
   document.getElementById('addToCartBtn').onclick = () => addToCart(p.title);
   document.getElementById('buyNowBtn').onclick = () => buyNow(p.title);
   
@@ -1045,7 +1045,7 @@ function addToCart(productName) {
 function buyNow(productName) {
   showToast("Proceeding to checkout with " + productName + "...");
   setTimeout(function() {
-    window.open("https://wa.me/917305252962?text=" + encodeURIComponent("Hi Pavana Silks, I want to buy the " + productName + ". Please guide me with the payment and delivery details."), "_blank");
+    window.open("https://wa.me/918667570740?text=" + encodeURIComponent("Hi Pavana Silks, I want to buy the " + productName + ". Please guide me with the payment and delivery details."), "_blank");
   }, 1500);
 }
 
