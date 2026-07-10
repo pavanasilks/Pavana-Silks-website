@@ -1395,14 +1395,20 @@ footer::before {
           </tr>
         </table>
         
-        <a href="https://wa.me/917305252962?text=Hi%20Pavana%20Silks%2C%20I%20am%20interested%20in%20inquiring%20about%20the%20Kancheepuram%20Suvarna%20Gold%20Silk%20Saree." target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; background: var(--gold); color: #fff; padding: 1.2rem; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; margin-bottom: 1rem; box-shadow: 0 4px 16px rgba(184,145,42,0.25);" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">
+        <!-- E-Commerce Buttons -->
+        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+          <button onclick="addToCart('Kancheepuram Suvarna Gold Silk Saree')" style="flex: 1; padding: 1.1rem; border: 1px solid var(--gold); background: none; color: var(--gold); font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 4px;" onmouseover="this.style.background='rgba(184,145,42,0.05)';" onmouseout="this.style.background='none';">
+            Add to Cart
+          </button>
+          <button onclick="buyNow('Kancheepurna Suvarna Gold Silk Saree')" style="flex: 1; padding: 1.1rem; border: none; background: var(--text-dark); color: #fff; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 4px;" onmouseover="this.style.background='var(--warm-brown)';" onmouseout="this.style.background='var(--text-dark)';">
+            Buy Now
+          </button>
+        </div>
+
+        <a href="https://wa.me/917305252962?text=Hi%20Pavana%20Silks%2C%20I%20am%20interested%20in%20inquiring%20about%20the%20Kancheepuram%20Suvarna%20Gold%20Silk%20Saree." target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; background: var(--gold); color: #fff; padding: 1.2rem; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(184,145,42,0.25);" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">
           <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.335 4.963L2 22l5.233-1.371a9.927 9.927 0 004.779 1.21h.005c5.505 0 9.99-4.478 9.99-9.985C22.007 6.478 17.521 2 12.012 2zm4.7 13.914c-.2.56-1.168 1.057-1.608 1.13-.43.07-.86.13-2.76-.62-2.43-.96-3.99-3.41-4.11-3.57-.12-.16-.97-1.29-.97-2.46 0-1.17.61-1.74.83-1.98.22-.24.49-.3.65-.3.16 0 .32 0 .46.01.15.01.35-.06.55.42.2.49.69 1.68.75 1.8.06.12.1.26.02.42-.08.17-.12.27-.24.41-.12.14-.26.32-.37.43-.12.12-.25.25-.11.49.14.24.63 1.03 1.35 1.67.92.82 1.7 1.07 1.94 1.19.24.12.38.1.52-.06.14-.17.61-.71.77-.96.16-.24.32-.2.53-.12.21.08 1.35.63 1.58.75.23.12.38.18.44.28.06.1.06.58-.14 1.14z"/></svg>
           Enquire via WhatsApp
         </a>
-        
-        <button onclick="backToNewArrivalsList()" style="display: flex; align-items: center; justify-content: center; background: none; color: var(--gold); border: 1px solid var(--gold); padding: 1.1rem; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; width: 100%;" onmouseover="this.style.background='var(--gold)'; this.style.color='#fff';" onmouseout="this.style.background='none'; this.style.color='var(--gold)';">
-          Back to list
-        </button>
       </div>
     </div>
   </div>
@@ -2061,6 +2067,46 @@ footer::before {
       startHomeAutoSlide();
     }
   };
+
+  window.addToCart = function(productName) {
+    showToast(productName + " added to your cart!");
+  };
+
+  window.buyNow = function(productName) {
+    showToast("Proceeding to checkout with " + productName + "...");
+    setTimeout(function() {
+      window.open("https://wa.me/917305252962?text=" + encodeURIComponent("Hi Pavana Silks, I want to buy the " + productName + ". Please guide me with the payment and delivery details."), "_blank");
+    }, 1500);
+  };
+
+  function showToast(message) {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      container.style.cssText = "position: fixed; top: 80px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px;";
+      document.body.appendChild(container);
+    }
+    
+    const toast = document.createElement('div');
+    toast.style.cssText = "background: #2C1A0E; color: #FAF6F0; border: 1px solid #B8912A; padding: 1rem 1.8rem; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; box-shadow: 0 4px 20px rgba(44,26,14,0.15); opacity: 0; transform: translateY(-20px); transition: all 0.4s ease;";
+    toast.textContent = message;
+    
+    container.appendChild(toast);
+    
+    setTimeout(function() {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    }, 50);
+    
+    setTimeout(function() {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-20px)';
+      setTimeout(function() {
+        toast.remove();
+      }, 400);
+    }, 3500);
+  }
 })();
 </script>
 
