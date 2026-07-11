@@ -1399,6 +1399,50 @@ function showToast(message) {
   </style>
 
   <script>
+    // ---------- Pavana backend connection ----------
+    // Local testing: talks to your backend running on http://localhost:3000
+    // Live site: talks to your deployed Render backend URL.
+    // IMPORTANT: after you deploy the backend to Render, replace the URL below
+    // with your real Render URL, e.g. "https://pavana-silks-backend.onrender.com"
+    const PAVANA_API_BASE = (function () {
+      const host = window.location.hostname;
+      if (host === 'localhost' || host === '127.0.0.1') {
+        return 'http://localhost:3000';
+      }
+      return 'https://pavana-silks-backend.onrender.com';
+    })();
+
+    function getChatSessionId() {
+      let id = sessionStorage.getItem('pavana_chat_session');
+      if (!id) {
+        id = 'sess_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+        sessionStorage.setItem('pavana_chat_session', id);
+      }
+      return id;
+    }
+
+    async function sendChatMessage(text) {
+      const thinkingEl = addChatMessage('…', 'bot');
+      try {
+        const res = await fetch(PAVANA_API_BASE + '/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId: getChatSessionId(), message: text }),
+        });
+        if (!res.ok) throw new Error('Backend responded with ' + res.status);
+        const data = await res.json();
+        thinkingEl.remove();
+        addChatMessage(data.reply || "Sorry, I couldn't get a reply just now.", 'bot');
+      } catch (err) {
+        console.error('[Pavana Chat] request failed:', err);
+        thinkingEl.remove();
+        addChatMessage(
+          "I'm having trouble connecting right now. Please try again in a moment, or reach our Styling Desk on WhatsApp at +91 86675 70740.",
+          'bot'
+        );
+      }
+    }
+
     window.handleBotCollectionClick = function(collectionType) {
       toggleChatbot();
       const colSection = document.getElementById('collection');
@@ -1434,33 +1478,28 @@ function showToast(message) {
     };
 
     window.selectChatOption = function(option) {
-      let questionText = "";
-      let replyText = "";
-      
-      if (option === 'inventory') {
-        questionText = "How many sarees do you have?";
-        replyText = "Currently, we have **1** exclusive master-weave available for purchase: the **Kancheepuram Suvarna Gold Silk Saree** in our *New Arrivals* collection. More drapes are currently on the handlooms!";
-      } else if (option === 'collections') {
-        questionText = "What collections are available?";
-        replyText = "We feature four signature collections. Click a collection to explore directly:\n\n" +
+      if (option === 'collections') {
+        const questionText = "What collections are available?";
+        const replyText = "We feature four signature collections. Click a collection to explore directly:\n\n" +
                     "<div style='display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem;'>" +
                     "  <button onclick='handleBotCollectionClick(\"new_arrivals\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>New Arrivals (In Stock)</button>" +
                     "  <button onclick='handleBotCollectionClick(\"bestsellers\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Bestsellers (Coming Soon)</button>" +
                     "  <button onclick='handleBotCollectionClick(\"traditional\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Traditional Handlooms (Coming Soon)</button>" +
                     "  <button onclick='handleBotCollectionClick(\"limited\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Limited Edition (Coming Soon)</button>" +
                     "</div>";
-      } else if (option === 'stock') {
-        questionText = "Are any sarees out of stock?";
-        replyText = "Yes. Currently, all sarees in our **Bestsellers**, **Traditional Handlooms**, and **Limited Edition** collections are out of stock. \n\nOnly the **Kancheepuram Suvarna Gold Silk Saree** (New Arrivals) is currently in stock and available for checkout!";
-      } else if (option === 'care') {
-        questionText = "How do I care for my silk saree?";
-        replyText = "To maintain your pure silk's luster:\n1. **Dry clean** only.\n2. Store wrapped in a breathable **muslin cloth**.\n3. Avoid hanging on metal hangers; refold periodically to prevent creases.\n4. Keep away from direct sunlight and damp areas.";
+        addChatMessage(questionText, 'user');
+        setTimeout(() => addChatMessage(replyText, 'bot'), 300);
+        return;
       }
-      
+
+      const questionMap = {
+        inventory: "How many sarees do you have?",
+        stock: "Are any sarees out of stock?",
+        care: "How do I care for my silk saree?",
+      };
+      const questionText = questionMap[option] || option;
       addChatMessage(questionText, 'user');
-      setTimeout(() => {
-        addChatMessage(replyText, 'bot');
-      }, 400);
+      sendChatMessage(questionText);
     };
 
     window.handleChatSubmit = function(event) {
@@ -1468,41 +1507,15 @@ function showToast(message) {
       const input = document.getElementById('chatbot-input');
       const text = input.value.trim();
       if (!text) return;
-      
+
       addChatMessage(text, 'user');
       input.value = '';
-      
-      setTimeout(() => {
-        let reply = "I'm sorry, I didn't quite get that. You can ask about our collections, stock status, care tips, or contact our styling desk!";
-        const clean = text.toLowerCase();
-        
-        if (clean.includes('how many') || clean.includes('saree') || clean.includes('item') || clean.includes('product') || clean.includes('total')) {
-          reply = "Currently, we have **1** exclusive drape available in stock: the **Kancheepuram Suvarna Gold Silk Saree**. Other designer sarees are currently in production on our handlooms!";
-        } else if (clean.includes('collection') || clean.includes('category') || clean.includes('type')) {
-          reply = "We offer 4 key collections. Click a collection to explore directly:\n\n" +
-                  "<div style='display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem;'>" +
-                  "  <button onclick='handleBotCollectionClick(\"new_arrivals\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>New Arrivals (In Stock)</button>" +
-                  "  <button onclick='handleBotCollectionClick(\"bestsellers\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Bestsellers (Coming Soon)</button>" +
-                  "  <button onclick='handleBotCollectionClick(\"traditional\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Traditional Handlooms (Coming Soon)</button>" +
-                  "  <button onclick='handleBotCollectionClick(\"limited\")' style='text-align: left; background: #fff; border: 1px solid var(--gold, #B8912A); border-radius: 4px; padding: 0.6rem; font-family: \"Jost\", sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--gold, #B8912A); cursor: pointer; transition: all 0.2s;' onmouseover='this.style.background=\"rgba(184,145,42,0.05)\"' onmouseout='this.style.background=\"#fff\"'>Limited Edition (Coming Soon)</button>" +
-                  "</div>";
-        } else if (clean.includes('stock') || clean.includes('available') || clean.includes('out of stock') || clean.includes('coming soon')) {
-          reply = "Our **Bestsellers**, **Traditional**, and **Limited** collections are currently out of stock (coming soon!). Only the **Kancheepuram Suvarna Gold Silk Saree** in *New Arrivals* is in stock.";
-        } else if (clean.includes('care') || clean.includes('wash') || clean.includes('clean') || clean.includes('store')) {
-          reply = "Dry clean only is highly recommended. Store wrapped in a light muslin cloth, away from dampness and direct sunlight.";
-        } else if (clean.includes('contact') || clean.includes('whatsapp') || clean.includes('number') || clean.includes('phone') || clean.includes('call')) {
-          reply = "You can contact our Styling Desk directly on WhatsApp at **+91 86675 70740**.";
-        } else if (clean.includes('hi') || clean.includes('hello') || clean.includes('hey') || clean.includes('namaste')) {
-          reply = "Welcome to Pavana Silks! How can I help you today? You can ask me about our collections, current stock, care tips, or how to contact us.";
-        }
-        
-        addChatMessage(reply, 'bot');
-      }, 500);
+      sendChatMessage(text);
     };
 
     function addChatMessage(text, sender) {
       const messagesContainer = document.getElementById('chatbot-messages');
-      if (!messagesContainer) return;
+      if (!messagesContainer) return null;
       
       const message = document.createElement('div');
       if (sender === 'user') {
@@ -1515,6 +1528,7 @@ function showToast(message) {
       
       messagesContainer.appendChild(message);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      return message;
     }
   </script>
 
