@@ -218,7 +218,7 @@ body {
 /* ── HERO ── */
 #hero-wrapper {
   position: relative;
-  height: 800vh;
+  height: 250vh;
   background: #111008; /* same as sticky — no ivory bleed */
 }
 #hero-sticky {
@@ -227,15 +227,16 @@ body {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background: #111008 url('./frames/ezgif-frame-001.png') center / cover no-repeat;
+  background: #111008;
 }
 
-/* Canvas fills the sticky frame */
-#hero-canvas {
+/* Video fills the sticky frame */
+#hero-video {
   position: absolute;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   display: block;
 }
 
@@ -704,7 +705,7 @@ section { padding: 6rem 3rem; }
 /* SECOND SCROLL HERO */
 #story-hero {
   position: relative;
-  height: 2800vh;
+  height: 250vh;
   padding: 0;
   background: #0f0b07;
 }
@@ -1211,8 +1212,8 @@ footer::before {
 <div id="hero-wrapper">
   <div id="hero-sticky">
 
-    <!-- THE CANVAS — frames paint here -->
-    <canvas id="hero-canvas"></canvas>
+    <!-- CONTINUOUS VIDEO BACKGROUND -->
+    <video id="hero-video" src="./frames/Woman_in_floating_saree_202608071557.mp4" autoplay loop muted playsinline></video>
 
     <!-- Cinematic vignette -->
     <div class="hero-vignette"></div>
@@ -1263,29 +1264,44 @@ footer::before {
 <section id="features">
   <div class="features-header reveal-up">
     <p class="section-tag">Our Signature</p>
-    <h2 class="section-heading">Crafted with <em>Purpose</em></h2>
+    <h2 class="section-heading">Crafted with <em>love</em></h2>
     <div class="gold-divider"></div>
     <p class="section-subtext">Every saree tells a story woven through generations of artisanship.</p>
   </div>
-  <div class="features-grid">
-    <div class="feature-card reveal-up" style="transition-delay:0.1s">
-      <span class="feature-number">01</span>
-      <span class="feature-icon">🪷</span>
-      <h3>Pure Silk Quality</h3>
-      <p>Only the finest mulberry silk and handloom cotton-silk blends, sourced from the looms of Kancheepuram and Thanjavur.</p>
+  <div style="position: relative; max-width: 1300px; margin: 0 auto; padding: 0 3rem;">
+    <!-- Left Arrow -->
+    <button onclick="toggleFeaturesPage()" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid #C5A059; color: #C5A059; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 10;" onmouseover="this.style.background='#C5A059'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A059';">
+      &larr;
+    </button>
+
+    <div class="features-grid" id="features-page-1">
+      <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
+        <img id="feature-img-1" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784886714/WhatsApp_Image_2026-07-24_at_3.17.08_PM_peux2n.jpg" alt="New Collection Saree 1" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
+      <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
+        <img id="feature-img-2" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784892042/WhatsApp_Image_2026-07-24_at_4.49.41_PM_3_kl5cro.jpg" alt="New Collection Saree 2" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
+      <div class="feature-card reveal-up" style="transition-delay:0.3s; padding: 0; overflow: hidden; height: 400px;">
+        <img id="feature-img-3" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784895506/WhatsApp_Image_2026-07-24_at_5.46.22_PM_mlgtb4.jpg" alt="New Collection Saree 3" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
     </div>
-    <div class="feature-card reveal-up" style="transition-delay:0.2s">
-      <span class="feature-number">02</span>
-      <span class="feature-icon">🧵</span>
-      <h3>Handwoven Elegance</h3>
-      <p>Each saree takes days to weave — a patient, meditative art where human hands shape every thread into heirloom beauty.</p>
+    
+    <div class="features-grid" id="features-page-2" style="display: none; animation: fadeIn 0.4s ease;">
+      <div class="feature-card reveal-up" style="transition-delay:0.4s; padding: 0; overflow: hidden; height: 400px;">
+        <img id="feature-img-4" src="/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg" alt="New Collection Saree 4" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
+      <div class="feature-card reveal-up" style="transition-delay:0.5s; padding: 0; overflow: hidden; height: 400px;">
+        <img id="feature-img-5" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784887950/ChatGPT_Image_Jul_24_2026_10_47_28_AM_a5if4j.png" alt="New Collection Saree 5" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
+      <div class="feature-card reveal-up" style="transition-delay:0.6s; padding: 0; overflow: hidden; height: 400px;">
+        <img id="feature-img-6" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784897404/WhatsApp_Image_2026-07-24_at_6.16.52_PM_unvykk.jpg" alt="New Collection Saree 6" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
     </div>
-    <div class="feature-card reveal-up" style="transition-delay:0.3s">
-      <span class="feature-number">03</span>
-      <span class="feature-icon">✨</span>
-      <h3>Bridal & Festive Collection</h3>
-      <p>From intimate weddings to grand celebrations — curated collections that honour tradition while embracing modern grace.</p>
-    </div>
+    
+    <!-- Right Arrow -->
+    <button onclick="toggleFeaturesPage()" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid #C5A059; color: #C5A059; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 10;" onmouseover="this.style.background='#C5A059'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A059';">
+      &rarr;
+    </button>
   </div>
 </section>
 
@@ -1296,32 +1312,41 @@ footer::before {
       <p class="section-tag">Curated Weaves</p>
       <h2 class="section-heading">Our <em>Collections</em></h2>
     </div>
-    <a href="javascript:void(0)" onclick="showNewArrivals()" id="view-all-collections-btn" class="btn-outline reveal-up"><span>View All Collections</span></a>
+    <a href="/new-arrivals" id="view-all-collections-btn" class="btn-outline reveal-up"><span>View All Collections</span></a>
   </div>
   <div class="collection-grid" id="collection-grid">
-    <a href="javascript:void(0)" onclick="showNewArrivals()" class="saree-card reveal-up" style="transition-delay:0s; display: block; text-decoration: none;">
+    <a href="/new-arrivals" class="saree-card reveal-up" style="transition-delay:0s; display: block; text-decoration: none;">
       <img src="/saree images/kancheepuram-gold.jpg" alt="Kancheepuram Gold" class="saree-img" />
       <div class="saree-card-overlay"></div>
       <div class="saree-badge">New Arrival</div>
-      <div class="saree-card-info"><h4>Kancheepuram Gold</h4><p>Pure silk · Gold zari</p></div>
+      <div class="saree-card-info"><h4>New Arrivals</h4><p>Explore our latest weaves</p></div>
     </a>
     <a href="javascript:void(0)" onclick="showComingSoon('Pink Bridal Silk Collection')" class="saree-card reveal-up" style="transition-delay:0.1s; display: block; text-decoration: none;">
-      <img src="/saree images/pink-bridal.jpg" alt="Pink Bridal Silk" class="saree-img" />
-      <div class="saree-card-overlay"></div>
-      <div class="saree-badge">Bestseller</div>
-      <div class="saree-card-info"><h4>Pink Bridal Silk</h4><p>Pure silk · Zari weave</p></div>
+      <img src="/saree images/pink-bridal.jpg" alt="Pink Bridal Silk" class="saree-img" style="filter: blur(6px); transform: scale(1.05);" />
+      <div class="saree-card-overlay" style="background: rgba(0,0,0,0.2);"></div>
+      <div class="saree-badge">Coming Soon</div>
+      <div class="saree-card-info" style="text-align: center; width: 100%;">
+        <h4 style="font-size: 1.4rem; font-weight: 500;">Bestseller</h4>
+        <p style="font-size: 1rem; color: #fff; letter-spacing: 0.1em;">Coming Soon</p>
+      </div>
     </a>
     <a href="javascript:void(0)" onclick="showComingSoon('Traditional Weaves Collection')" class="saree-card reveal-up" style="transition-delay:0.2s; display: block; text-decoration: none;">
-      <img src="/saree images/emerald-temple.jpg" alt="Emerald Temple" class="saree-img" />
-      <div class="saree-card-overlay"></div>
-      <div class="saree-badge">Traditional</div>
-      <div class="saree-card-info"><h4>Emerald Temple</h4><p>Silk · Temple border</p></div>
+      <img src="/saree images/emerald-temple.jpg" alt="Emerald Temple" class="saree-img" style="filter: blur(6px); transform: scale(1.05);" />
+      <div class="saree-card-overlay" style="background: rgba(0,0,0,0.2);"></div>
+      <div class="saree-badge">Coming Soon</div>
+      <div class="saree-card-info" style="text-align: center; width: 100%;">
+        <h4 style="font-size: 1.4rem; font-weight: 500;">Traditional</h4>
+        <p style="font-size: 1rem; color: #fff; letter-spacing: 0.1em;">Coming Soon</p>
+      </div>
     </a>
     <a href="javascript:void(0)" onclick="showComingSoon('Limited Edition Collection')" class="saree-card reveal-up" style="transition-delay:0.3s; display: block; text-decoration: none;">
-      <img src="/saree images/royal-violet.jpg" alt="Royal Violet" class="saree-img" />
-      <div class="saree-card-overlay"></div>
-      <div class="saree-badge">Limited</div>
-      <div class="saree-card-info"><h4>Royal Violet</h4><p>Pure silk · Antique zari</p></div>
+      <img src="/saree images/royal-violet.jpg" alt="Royal Violet" class="saree-img" style="filter: blur(6px); transform: scale(1.05);" />
+      <div class="saree-card-overlay" style="background: rgba(0,0,0,0.2);"></div>
+      <div class="saree-badge">Coming Soon</div>
+      <div class="saree-card-info" style="text-align: center; width: 100%;">
+        <h4 style="font-size: 1.4rem; font-weight: 500;">Limited</h4>
+        <p style="font-size: 1rem; color: #fff; letter-spacing: 0.1em;">Coming Soon</p>
+      </div>
     </a>
   </div>
   
@@ -1475,6 +1500,36 @@ footer::before {
   </div>
 </section>
 
+<!-- ══ FEATURES (Duplicated) ══ -->
+<section id="features-2" style="background: var(--cream); text-align: center;">
+  <div class="features-header reveal-up">
+    <p class="section-tag">Our Signature</p>
+    <h2 class="section-heading">Crafted with <em>Purpose</em></h2>
+    <div class="gold-divider"></div>
+    <p class="section-subtext">Every saree tells a story woven through generations of artisanship.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal-up" style="transition-delay:0.1s">
+      <span class="feature-number">01</span>
+      <span class="feature-icon">🪷</span>
+      <h3>Pure Silk Quality</h3>
+      <p>Only the finest mulberry silk and handloom cotton-silk blends, sourced from the looms of Kancheepuram and Thanjavur.</p>
+    </div>
+    <div class="feature-card reveal-up" style="transition-delay:0.2s">
+      <span class="feature-number">02</span>
+      <span class="feature-icon">🧵</span>
+      <h3>Handwoven Elegance</h3>
+      <p>Each saree takes days to weave — a patient, meditative art where human hands shape every thread into heirloom beauty.</p>
+    </div>
+    <div class="feature-card reveal-up" style="transition-delay:0.3s">
+      <span class="feature-number">03</span>
+      <span class="feature-icon">✨</span>
+      <h3>Bridal & Festive Collection</h3>
+      <p>From intimate weddings to grand celebrations — curated collections that honour tradition while embracing modern grace.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta">
   <div class="cta-inner reveal-up">
@@ -1552,8 +1607,8 @@ footer::before {
 <script>
 (function() {
   var TOTAL_FRAMES = 200;
-  var canvas = document.getElementById('hero-canvas');
-  var ctx = canvas ? canvas.getContext('2d') : null;
+  var canvas = null;
+  var ctx = null;
   var heroWrapper = document.getElementById('hero-wrapper');
   var STORY_FRAMES = 200;
   var storyCanvas = document.getElementById('story-hero-canvas');
@@ -1678,16 +1733,7 @@ footer::before {
   }
 
   function resizeCanvas() {
-    if (!canvas || !ctx) return;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    paintFrame(currentFrame);
+    // Replaced by video
   }
 
   function resizeStoryCanvas() {
@@ -1747,12 +1793,7 @@ footer::before {
   }
 
   function paintFrame(idx) {
-    if (!canvas || !ctx) return;
-    var img = images[idx] || images[0];
-    if (!img || !img.complete || !img.naturalWidth) return;
-
-    drawCoverFrame(ctx, img, 0.15);
-    if (frameDebug) frameDebug.textContent = 'Frame ' + (idx + 1) + '/' + TOTAL_FRAMES;
+    // Replaced by video
   }
 
   function paintStoryFrame(idx) {
@@ -1888,39 +1929,26 @@ footer::before {
     if (loaded >= TOTAL_FRAMES) startAfterLoaderDelay();
   }
 
-  if (canvas && ctx) {
-    window.addEventListener('resize', function() {
-      resizeCanvas();
-      resizeStoryCanvas();
-    });
-    for (var i = 0; i < TOTAL_FRAMES; i++) {
+  window.addEventListener('resize', function() {
+    resizeStoryCanvas();
+  });
+  
+  if (storyCanvas && storyCtx) {
+    for (var j = 0; j < STORY_FRAMES; j++) {
       (function(idx) {
         var img = new Image();
-        img.onload = function() { onFrameDone(idx); };
-        img.onerror = function() { onFrameDone(idx); };
-        img.src = './frames/ezgif-frame-' + padded3(idx + 1) + '.png';
-        images[idx] = img;
-      })(i);
+        img.onload = function() {
+          if (idx === 0) {
+            resizeStoryCanvas();
+            paintStoryFrame(0);
+          }
+        };
+        img.src = './frames1/frame_' + padded3(idx + 1) + '.jpg';
+        storyImages[idx] = img;
+      })(j);
     }
-    if (storyCanvas && storyCtx) {
-      for (var j = 0; j < STORY_FRAMES; j++) {
-        (function(idx) {
-          var img = new Image();
-          img.onload = function() {
-            if (idx === 0) {
-              resizeStoryCanvas();
-              paintStoryFrame(0);
-            }
-          };
-          img.src = './frames1/frame_' + padded3(idx + 1) + '.jpg';
-          storyImages[idx] = img;
-        })(j);
-      }
-    }
-    startAfterLoaderDelay();
-  } else {
-    hideLoader();
   }
+  startAfterLoaderDelay();
 
   var revealObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
@@ -2482,7 +2510,7 @@ footer::before {
       }
       
       if (collectionType === 'new_arrivals') {
-        if (typeof showNewArrivals === 'function') showNewArrivals();
+        window.location.href = '/new-arrivals';
       } else if (collectionType === 'bestsellers') {
         if (typeof showComingSoon === 'function') showComingSoon('Pink Bridal Silk Collection');
       } else if (collectionType === 'traditional') {
@@ -2558,6 +2586,93 @@ footer::before {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
       return message;
     }
+
+    // Slideshow for Features Section
+    const featureImg1 = document.getElementById('feature-img-1');
+    const featureImg2 = document.getElementById('feature-img-2');
+    const featureImg3 = document.getElementById('feature-img-3');
+    const featureImg4 = document.getElementById('feature-img-4');
+    const featureImg5 = document.getElementById('feature-img-5');
+    const featureImg6 = document.getElementById('feature-img-6');
+
+    const images1 = [
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784886714/WhatsApp_Image_2026-07-24_at_3.17.08_PM_peux2n.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784886714/WhatsApp_Image_2026-07-24_at_3.17.07_PM_1_hfvzpj.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320091/WhatsApp_Image_2026-07-29_at_3.41.19_PM_uyze7s.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320091/WhatsApp_Image_2026-07-29_at_3.41.19_PM_1_vnudsj.jpg'
+    ];
+    const images2 = [
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784892042/WhatsApp_Image_2026-07-24_at_4.49.41_PM_3_kl5cro.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784892043/WhatsApp_Image_2026-07-24_at_4.49.41_PM_2_ww4zyc.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320494/WhatsApp_Image_2026-07-29_at_3.50.44_PM_qboadz.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320494/WhatsApp_Image_2026-07-29_at_3.50.45_PM_onsiha.jpg'
+    ];
+    const images3 = [
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784895506/WhatsApp_Image_2026-07-24_at_5.46.22_PM_mlgtb4.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784895503/WhatsApp_Image_2026-07-24_at_5.46.22_PM_1_lx3p6s.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320737/WhatsApp_Image_2026-07-29_at_3.55.01_PM_sjcefg.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320737/WhatsApp_Image_2026-07-29_at_3.55.01_PM_1_n4c33r.jpg'
+    ];
+    const images4 = [
+      '/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg',
+      '/saree images/WhatsApp Image 2026-07-07 at 1.52.37 PM.jpeg',
+      '/saree images/WhatsApp Image 2026-07-07 at 1.52.41 PM.jpeg',
+      '/saree images/WhatsApp Image 2026-07-07 at 1.52.45 PM.jpeg'
+    ];
+    const images5 = [
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784887950/ChatGPT_Image_Jul_24_2026_10_47_28_AM_a5if4j.png',
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784887946/ChatGPT_Image_Jul_24_2026_10_47_39_AM_cnzwmv.png',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320287/WhatsApp_Image_2026-07-29_at_3.47.15_PM_bccmfc.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320286/WhatsApp_Image_2026-07-29_at_3.47.41_PM_cp7iut.jpg'
+    ];
+    const images6 = [
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784897404/WhatsApp_Image_2026-07-24_at_6.16.52_PM_unvykk.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784897401/WhatsApp_Image_2026-07-24_at_6.16.53_PM_jbrhx5.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320938/WhatsApp_Image_2026-07-29_at_3.57.34_PM_1_uegzr2.jpg',
+      'https://res.cloudinary.com/rixydqqx/image/upload/v1785320938/WhatsApp_Image_2026-07-29_at_3.57.34_PM_btrmsx.jpg'
+    ];
+
+    let index1 = 0, index2 = 0, index3 = 0, index4 = 0, index5 = 0, index6 = 0;
+
+    function crossfadeImage(imgEl, imagesArr, indexVar) {
+      if (!imgEl) return indexVar;
+      const nextIndex = (indexVar + 1) % imagesArr.length;
+      
+      const parent = imgEl.parentElement;
+      parent.style.backgroundImage = `url('${imgEl.src}')`;
+      parent.style.backgroundSize = 'cover';
+      parent.style.backgroundPosition = 'center';
+      
+      imgEl.style.opacity = 0;
+      setTimeout(() => {
+        imgEl.src = imagesArr[nextIndex];
+        imgEl.style.opacity = 1;
+      }, 500); // Wait for fade out
+      return nextIndex;
+    }
+
+    setInterval(() => { index1 = crossfadeImage(featureImg1, images1, index1); }, 3000);
+    setInterval(() => { index2 = crossfadeImage(featureImg2, images2, index2); }, 3500);
+    setInterval(() => { index3 = crossfadeImage(featureImg3, images3, index3); }, 4000);
+    setInterval(() => { index4 = crossfadeImage(featureImg4, images4, index4); }, 3200);
+    setInterval(() => { index5 = crossfadeImage(featureImg5, images5, index5); }, 3700);
+    setInterval(() => { index6 = crossfadeImage(featureImg6, images6, index6); }, 4200);
+
+    function toggleFeaturesPage() {
+      const p1 = document.getElementById('features-page-1');
+      const p2 = document.getElementById('features-page-2');
+      
+      if (p1.style.display !== 'none') {
+        p1.style.display = 'none';
+        p2.style.display = 'grid';
+      } else {
+        p1.style.display = 'grid';
+        p2.style.display = 'none';
+      }
+    }
+
+    // Manual navigation via arrow buttons
+
   </script>
 
 </body>
