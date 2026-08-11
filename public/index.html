@@ -1116,6 +1116,11 @@ footer::before {
 
 <!-- ══ LOADING SCREEN ══ -->
 <div id="loader">
+  <script>
+    if (sessionStorage.getItem('pavana_visited_once') || window.location.hash) {
+      document.getElementById('loader').style.display = 'none';
+    }
+  </script>
 
   <!-- Animated lotus SVG -->
   <svg class="loader-lotus" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1274,27 +1279,35 @@ footer::before {
       &larr;
     </button>
 
-    <div class="features-grid" id="features-page-1">
-      <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
-        <img id="feature-img-1" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784886714/WhatsApp_Image_2026-07-24_at_3.17.08_PM_peux2n.jpg" alt="New Collection Saree 1" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-      </div>
-      <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
-        <img id="feature-img-2" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784892042/WhatsApp_Image_2026-07-24_at_4.49.41_PM_3_kl5cro.jpg" alt="New Collection Saree 2" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-      </div>
-      <div class="feature-card reveal-up" style="transition-delay:0.3s; padding: 0; overflow: hidden; height: 400px;">
-        <img id="feature-img-3" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784895506/WhatsApp_Image_2026-07-24_at_5.46.22_PM_mlgtb4.jpg" alt="New Collection Saree 3" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-      </div>
-    </div>
-    
-    <div class="features-grid" id="features-page-2" style="display: none; animation: fadeIn 0.4s ease;">
-      <div class="feature-card reveal-up" style="transition-delay:0.4s; padding: 0; overflow: hidden; height: 400px;">
-        <img id="feature-img-4" src="/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg" alt="New Collection Saree 4" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-      </div>
-      <div class="feature-card reveal-up" style="transition-delay:0.5s; padding: 0; overflow: hidden; height: 400px;">
-        <img id="feature-img-5" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784887950/ChatGPT_Image_Jul_24_2026_10_47_28_AM_a5if4j.png" alt="New Collection Saree 5" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-      </div>
-      <div class="feature-card reveal-up" style="transition-delay:0.6s; padding: 0; overflow: hidden; height: 400px;">
-        <img id="feature-img-6" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784897404/WhatsApp_Image_2026-07-24_at_6.16.52_PM_unvykk.jpg" alt="New Collection Saree 6" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+    <div style="overflow: hidden; width: 100%; padding: 1rem 0;">
+      <div id="features-carousel-track" style="display: flex; width: 200%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);">
+        <div style="width: 50%;">
+          <div class="features-grid" id="features-page-1">
+            <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
+              <img id="feature-img-1" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784886714/WhatsApp_Image_2026-07-24_at_3.17.08_PM_peux2n.jpg" alt="New Collection Saree 1" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
+              <img id="feature-img-2" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784892042/WhatsApp_Image_2026-07-24_at_4.49.41_PM_3_kl5cro.jpg" alt="New Collection Saree 2" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.3s; padding: 0; overflow: hidden; height: 400px;">
+              <img id="feature-img-3" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784895506/WhatsApp_Image_2026-07-24_at_5.46.22_PM_mlgtb4.jpg" alt="New Collection Saree 3" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+          </div>
+        </div>
+        
+        <div style="width: 50%;">
+          <div class="features-grid" id="features-page-2">
+            <div class="feature-card reveal-up" style="transition-delay:0.4s; padding: 0; overflow: hidden; height: 400px;">
+              <img id="feature-img-4" src="/saree images/WhatsApp Image 2026-07-07 at 1.52.31 PM.jpeg" alt="New Collection Saree 4" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.5s; padding: 0; overflow: hidden; height: 400px;">
+              <img id="feature-img-5" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784887950/ChatGPT_Image_Jul_24_2026_10_47_28_AM_a5if4j.png" alt="New Collection Saree 5" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.6s; padding: 0; overflow: hidden; height: 400px;">
+              <img id="feature-img-6" src="https://res.cloudinary.com/rixydqqx/image/upload/f_auto,q_auto/v1784897404/WhatsApp_Image_2026-07-24_at_6.16.52_PM_unvykk.jpg" alt="New Collection Saree 6" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -1657,7 +1670,9 @@ footer::before {
   function startAfterLoaderDelay() {
     if (loaderStartQueued || engineStarted) return;
     loaderStartQueued = true;
-    var wait = Math.max(0, 3000 - (Date.now() - loaderStartedAt));
+    var skipDelay = sessionStorage.getItem('pavana_visited_once') || window.location.hash;
+    sessionStorage.setItem('pavana_visited_once', 'true');
+    var wait = skipDelay ? 0 : Math.max(0, 3000 - (Date.now() - loaderStartedAt));
     setTimeout(startEngine, wait);
   }
 
@@ -2658,16 +2673,12 @@ footer::before {
     setInterval(() => { index5 = crossfadeImage(featureImg5, images5, index5); }, 3700);
     setInterval(() => { index6 = crossfadeImage(featureImg6, images6, index6); }, 4200);
 
+    let isFeaturesPage1 = true;
     function toggleFeaturesPage() {
-      const p1 = document.getElementById('features-page-1');
-      const p2 = document.getElementById('features-page-2');
-      
-      if (p1.style.display !== 'none') {
-        p1.style.display = 'none';
-        p2.style.display = 'grid';
-      } else {
-        p1.style.display = 'grid';
-        p2.style.display = 'none';
+      const track = document.getElementById('features-carousel-track');
+      if (track) {
+        isFeaturesPage1 = !isFeaturesPage1;
+        track.style.transform = isFeaturesPage1 ? 'translateX(0)' : 'translateX(-50%)';
       }
     }
 
