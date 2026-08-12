@@ -1500,6 +1500,239 @@ footer::before {
   </div>
 </section>
 
+<!-- FEATURED SAREES SLIDER SECTION -->
+<section id="custom-4-boxes" style="background: var(--ivory); padding: 5rem 3rem; position: relative;">
+  <div style="text-align: center; margin-bottom: 3rem;" class="reveal-up">
+    <p class="section-tag">New Additions</p>
+    <h2 class="section-heading">Featured <em>Masterpieces</em></h2>
+    <div class="gold-divider" style="margin: 1.5rem auto;"></div>
+  </div>
+
+  <div style="max-width: 1200px; margin: 0 auto; position: relative;">
+    <!-- Arrows -->
+    <button onclick="document.getElementById('saree-slider').scrollBy({left: -350, behavior: 'smooth'})" style="position: absolute; left: -3rem; top: 40%; transform: translateY(-50%); width: 48px; height: 48px; border: 1px solid var(--gold); border-radius: 50%; background: var(--ivory); color: var(--gold); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: background 0.3s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='var(--ivory)'" aria-label="Scroll left">
+      <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M15 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button onclick="document.getElementById('saree-slider').scrollBy({left: 350, behavior: 'smooth'})" style="position: absolute; right: -3rem; top: 40%; transform: translateY(-50%); width: 48px; height: 48px; border: 1px solid var(--gold); border-radius: 50%; background: var(--ivory); color: var(--gold); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: background 0.3s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='var(--ivory)'" aria-label="Scroll right">
+      <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <!-- Slider Container -->
+    <div id="saree-slider" style="display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2rem;">
+      <style>
+        #saree-slider::-webkit-scrollbar { display: none; }
+        .saree-slide { flex: 0 0 calc(25% - 1.5rem); min-width: 250px; scroll-snap-align: start; background: #fff; border: 1px solid var(--parchment); text-align: center; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 8px 30px rgba(44,26,14,0.05); }
+        .saree-slide:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(44,26,14,0.1); }
+        .saree-slide-img-wrap { aspect-ratio: 4/5; overflow: hidden; position: relative; }
+        .saree-slide-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .saree-slide:hover .saree-slide-img-wrap img { transform: scale(1.06); }
+        .saree-slide-content { padding: 1.2rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .saree-slide-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.2; }
+        .btn-add-cart { margin-top: auto; padding: 0.8rem; background: var(--gold); color: #fff; border: none; font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.7rem; font-weight: 500; cursor: pointer; transition: background 0.3s, transform 0.2s; width: 100%; }
+        .btn-add-cart:hover { background: var(--warm-brown); transform: translateY(-2px); }
+        @media (max-width: 1024px) {
+          .saree-slide { flex: 0 0 calc(33.333% - 1.33rem); }
+        }
+        @media (max-width: 768px) {
+          .saree-slide { flex: 0 0 calc(50% - 1rem); }
+        }
+        @media (max-width: 480px) {
+          .saree-slide { flex: 0 0 100%; }
+          #custom-4-boxes button { display: none; } /* Hide arrows on mobile */
+        }
+      </style>
+
+      <!-- Box 1 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1785320091/WhatsApp_Image_2026-07-29_at_3.41.19_PM_uyze7s.jpg" alt="Premium Handloom Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Premium Handloom Silk Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Premium Handloom Silk Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1785320091/WhatsApp_Image_2026-07-29_at_3.41.19_PM_uyze7s.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 2 -->
+      <div class="saree-slide reveal-up" style="transition-delay: 0.1s;">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1785320287/WhatsApp_Image_2026-07-29_at_3.47.15_PM_bccmfc.jpg" alt="Heritage Weave Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Heritage Weave Silk Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Heritage Weave Silk Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1785320287/WhatsApp_Image_2026-07-29_at_3.47.15_PM_bccmfc.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 3 -->
+      <div class="saree-slide reveal-up" style="transition-delay: 0.2s;">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1785320494/WhatsApp_Image_2026-07-29_at_3.50.44_PM_qboadz.jpg" alt="Royal Motif Handloom Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Royal Motif Handloom Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Royal Motif Handloom Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1785320494/WhatsApp_Image_2026-07-29_at_3.50.44_PM_qboadz.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 4 -->
+      <div class="saree-slide reveal-up" style="transition-delay: 0.3s;">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1785320737/WhatsApp_Image_2026-07-29_at_3.55.01_PM_sjcefg.jpg" alt="Elegant Classic Handloom Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Elegant Classic Handloom Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Elegant Classic Handloom Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1785320737/WhatsApp_Image_2026-07-29_at_3.55.01_PM_sjcefg.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 5 -->
+      <div class="saree-slide reveal-up" style="transition-delay: 0.4s;">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1785320938/WhatsApp_Image_2026-07-29_at_3.57.34_PM_1_uegzr2.jpg" alt="Traditional Heritage Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Traditional Heritage Silk Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Traditional Heritage Silk Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1785320938/WhatsApp_Image_2026-07-29_at_3.57.34_PM_1_uegzr2.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 6 -->
+      <div class="saree-slide reveal-up" style="transition-delay: 0.5s;">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786420666/WhatsApp_Image_2026-08-10_at_6.14.51_PM_1_fprnyh.jpg" alt="Exclusive New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Exclusive New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Exclusive New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786420666/WhatsApp_Image_2026-08-10_at_6.14.51_PM_1_fprnyh.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 7 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786421693/WhatsApp_Image_2026-08-10_at_6.14.51_PM_2_nstauc.jpg" alt="Premium New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Premium New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Premium New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786421693/WhatsApp_Image_2026-08-10_at_6.14.51_PM_2_nstauc.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 8 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786421824/WhatsApp_Image_2026-08-10_at_6.14.26_PM_eamzve.jpg" alt="Classic New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Classic New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Classic New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786421824/WhatsApp_Image_2026-08-10_at_6.14.26_PM_eamzve.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 9 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786422142/WhatsApp_Image_2026-08-10_at_6.14.27_PM_zydmtr.jpg" alt="Elegant New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Elegant New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Elegant New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786422142/WhatsApp_Image_2026-08-10_at_6.14.27_PM_zydmtr.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 10 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786422527/WhatsApp_Image_2026-08-10_at_6.14.27_PM_1_fetdl6.jpg" alt="Gorgeous New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Gorgeous New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Gorgeous New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786422527/WhatsApp_Image_2026-08-10_at_6.14.27_PM_1_fetdl6.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 11 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786422703/WhatsApp_Image_2026-08-10_at_6.14.28_PM_qjf1fg.jpg" alt="Exquisite New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Exquisite New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Exquisite New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786422703/WhatsApp_Image_2026-08-10_at_6.14.28_PM_qjf1fg.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 12 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786422897/WhatsApp_Image_2026-08-10_at_6.14.28_PM_1_n8vsnb.jpg" alt="Royal New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Royal New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Royal New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786422897/WhatsApp_Image_2026-08-10_at_6.14.28_PM_1_n8vsnb.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 13 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786423098/WhatsApp_Image_2026-08-10_at_6.14.28_PM_2_egnlfn.jpg" alt="Majestic New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Majestic New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Majestic New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786423098/WhatsApp_Image_2026-08-10_at_6.14.28_PM_2_egnlfn.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 14 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786423348/WhatsApp_Image_2026-08-10_at_6.14.29_PM_1_jlt5cp.jpg" alt="Radiant New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Radiant New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Radiant New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786423348/WhatsApp_Image_2026-08-10_at_6.14.29_PM_1_jlt5cp.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 15 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786423506/WhatsApp_Image_2026-08-10_at_6.14.29_PM_stkcoq.jpg" alt="Enchanting New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Enchanting New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Enchanting New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786423506/WhatsApp_Image_2026-08-10_at_6.14.29_PM_stkcoq.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 16 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786423699/WhatsApp_Image_2026-08-10_at_6.14.30_PM_beaca5.jpg" alt="Alluring New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Alluring New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Alluring New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786423699/WhatsApp_Image_2026-08-10_at_6.14.30_PM_beaca5.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Box 17 -->
+      <div class="saree-slide reveal-up">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786423894/WhatsApp_Image_2026-08-10_at_6.14.30_PM_1_gpvpep.jpg" alt="Gilded New Arrival Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h4 class="saree-slide-title">Gilded New Arrival Saree</h4>
+          <button class="btn-add-cart" onclick="addToCart('Gilded New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786423894/WhatsApp_Image_2026-08-10_at_6.14.30_PM_1_gpvpep.jpg')">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- SECOND SCROLL HERO -->
 <section id="story-hero" aria-label="Silk movement showcase">
   <div id="story-hero-sticky">
