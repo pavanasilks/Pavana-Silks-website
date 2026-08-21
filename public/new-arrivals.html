@@ -710,7 +710,6 @@ footer {
         <a href="/">Home</a> &nbsp;/&nbsp; <a href="javascript:void(0)" onclick="showCatalog()">Collections</a> &nbsp;/&nbsp; <span id="breadcrumbTitle">Saree</span>
       </div>
       
-      <p class="product-tag" id="detailBadge">Saree</p>
       <h1 class="product-title" id="detailTitle">Kancheepuram Saree</h1>
       <p class="product-price" id="detailPrice">Price on Enquiry</p>
       
@@ -719,6 +718,22 @@ footer {
       <table class="spec-table" id="specTable">
         <!-- Dynamically Generated Specs -->
       </table>
+      
+      <div style="margin-top: 1.5rem; margin-bottom: 2rem; font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--text-dark);">
+        <h4 style="font-size: 1rem; margin-bottom: 0.8rem; font-weight: 500; color: var(--text-dark);">3 Days Replacement Policy</h4>
+        <p style="margin-bottom: 0.5rem;">Replacement available only for:</p>
+        <div style="margin-bottom: 1.2rem; line-height: 1.8; padding-left: 0.5rem;">
+          <div>Damaged Product</div>
+          <div>Wrong Product Delivered</div>
+          <div>Missing Item</div>
+          <div>Manufacturing Defect</div>
+        </div>
+        <p style="margin-bottom: 1rem; line-height: 1.6;">
+          Claims must be raised within 3 days of delivery.<br>
+          Product must be unused with original tags attached.
+        </p>
+        <a href="javascript:void(0)" onclick="document.getElementById('policyModal').style.display='flex'" style="color: var(--gold); text-decoration: none; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">View Full Policy</a>
+      </div>
       
       <!-- E-Commerce Buttons -->
       <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
@@ -1282,7 +1297,6 @@ const mainImgViewport = document.getElementById('mainImgViewport');
 const galleryCounter = document.getElementById('galleryCounter');
 const thumbGrid = document.getElementById('thumbGrid');
 
-const detailBadge = document.getElementById('detailBadge');
 const detailTitle = document.getElementById('detailTitle');
 const detailPrice = document.getElementById('detailPrice');
 const detailDesc = document.getElementById('detailDesc');
@@ -1349,7 +1363,6 @@ function showProduct(id, isManual = false) {
   // Populate info
   detailTitle.textContent = p.title;
   breadcrumbTitle.textContent = p.title;
-  detailBadge.textContent = p.badge;
   detailPrice.textContent = p.price;
   detailDesc.textContent = p.desc;
   
@@ -1959,6 +1972,80 @@ function showToast(message) {
       return message;
     }
   </script>
+
+  <!-- Full Policy Modal -->
+  <div id="policyModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; padding: 1rem;">
+    <div style="background: #FAF6F0; width: 100%; max-width: 650px; max-height: 85vh; overflow-y: auto; border-radius: 8px; position: relative; padding: 2rem; font-family: 'Jost', sans-serif; color: var(--text-dark);">
+      <button onclick="document.getElementById('policyModal').style.display='none'" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark);">&times;</button>
+      
+      <h2 style="font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; color: var(--gold);">Pavana Silks – 3 Days Replacement Policy</h2>
+      
+      <h3 style="font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(214,168,75,0.2); padding-bottom: 0.5rem;">Replacement Policy</h3>
+      
+      <div style="overflow-x: auto; margin-bottom: 1.5rem;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 500px;">
+          <thead>
+            <tr style="background-color: rgba(214,168,75,0.1); text-align: left;">
+              <th style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2); font-weight: 600;">Replacement Reason</th>
+              <th style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2); font-weight: 600;">Replacement Period</th>
+              <th style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2); font-weight: 600;">Replacement Policy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Damaged Product</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Within 3 days from delivery</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Replacement available after verification</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Wrong Product Delivered</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Within 3 days from delivery</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Replacement available</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Missing Item in Order</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Within 3 days from delivery</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Replacement available after verification</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Manufacturing Defect</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Within 3 days from delivery</td>
+              <td style="padding: 0.8rem; border: 1px solid rgba(214,168,75,0.2);">Replacement available after verification</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <h3 style="font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(214,168,75,0.2); padding-bottom: 0.5rem;">Important Information</h3>
+      
+      <p style="font-weight: 600; margin-bottom: 0.5rem;">Damaged, Wrong, or Missing Items</p>
+      <div style="margin-bottom: 1.5rem; line-height: 1.6; font-size: 0.9rem;">
+        <p style="margin-bottom: 0.3rem;">Customers must report the issue within 3 days of delivery.</p>
+        <p style="margin-bottom: 0.3rem;">Clear photos or videos of the product and package may be required for verification.</p>
+        <p style="margin-bottom: 0.3rem;">After successful verification, a replacement will be arranged.</p>
+      </div>
+      
+      <p style="font-weight: 600; margin-bottom: 0.5rem;">Manufacturing Defects</p>
+      <div style="margin-bottom: 1.5rem; line-height: 1.6; font-size: 0.9rem;">
+        <p style="margin-bottom: 0.3rem;">Any manufacturing defect must be reported within 3 days of delivery.</p>
+        <p style="margin-bottom: 0.3rem;">The product will be inspected and verified by the Pavana Silks support team.</p>
+        <p style="margin-bottom: 0.3rem;">Once approved, a replacement product will be provided.</p>
+      </div>
+      
+      <h3 style="font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(214,168,75,0.2); padding-bottom: 0.5rem;">Conditions</h3>
+      <div style="margin-bottom: 1.5rem; line-height: 1.6; font-size: 0.9rem;">
+        <p style="margin-bottom: 0.3rem;">The product must be unused, unwashed, and in its original condition with tags intact.</p>
+        <p style="margin-bottom: 0.3rem;">Claims made after 3 days from the delivery date will not be eligible for replacement.</p>
+        <p style="margin-bottom: 0.3rem;">Color variations due to screen settings or lighting conditions are not considered defects.</p>
+        <p style="margin-bottom: 0.3rem;">Pavana Silks reserves the right to verify all replacement requests before approval.</p>
+      </div>
+      
+      <h3 style="font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(214,168,75,0.2); padding-bottom: 0.5rem;">Customer Support</h3>
+      <p style="line-height: 1.6; font-size: 0.9rem;">
+        For any replacement request, please contact Pavana Silks Customer Support within 3 days of receiving your order. Our team will assist you with the verification and replacement process.
+      </p>
+    </div>
+  </div>
 
 </body>
 </html>
