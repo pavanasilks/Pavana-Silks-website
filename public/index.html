@@ -1459,13 +1459,13 @@ footer::before {
       <!-- Box 0 -->
       <div class="saree-slide reveal-up">
         <a href="/new-arrivals#latest-new-arrival-saree" class="saree-slide-img-wrap" style="display: block;">
-          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1786943723/20260814_115757_nfahcq.jpg" alt="Latest New Arrival Saree" />
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1787314325/WhatsApp_Image_2026-08-21_at_1.30.31_PM_vflggh.jpg" alt="Latest New Arrival Saree" />
         </a>
         <div class="saree-slide-content">
           <a href="/new-arrivals#latest-new-arrival-saree" style="text-decoration: none; color: inherit;">
             <h4 class="saree-slide-title">Latest New Arrival Saree</h4>
           </a>
-          <button class="btn-add-cart" onclick="addToCart('Latest New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1786943723/20260814_115757_nfahcq.jpg')">Add to Cart</button>
+          <button class="btn-add-cart" onclick="addToCart('Latest New Arrival Saree', 'https://res.cloudinary.com/rixydqqx/image/upload/v1787314325/WhatsApp_Image_2026-08-21_at_1.30.31_PM_vflggh.jpg')">Add to Cart</button>
         </div>
       </div>
 
@@ -2366,6 +2366,8 @@ footer::before {
   window.closeCheckoutModal = function() {
     document.getElementById('checkout-modal').style.display = 'none';
     document.getElementById('checkout-form').reset();
+    const upiScanner = document.getElementById('upi-scanner-container');
+    if (upiScanner) upiScanner.style.display = 'none';
   };
 
   window.submitOrder = function(event) {
@@ -2480,10 +2482,16 @@ footer::before {
         <!-- Payment Method -->
         <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.5rem;">
           <label style="font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-mid);">Payment Method</label>
-          <select id="cust-payment" style="width: 100%; padding: 0.8rem; border: 1px solid var(--parchment); border-radius: 4px; background: #fff; font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text-dark); outline: none;">
+          <select id="cust-payment" onchange="document.getElementById('upi-scanner-container').style.display = (this.value === 'UPI / Online Transfer Enquiry' ? 'flex' : 'none')" style="width: 100%; padding: 0.8rem; border: 1px solid var(--parchment); border-radius: 4px; background: #fff; font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text-dark); outline: none;">
             <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
             <option value="UPI / Online Transfer Enquiry">UPI / Online Transfer Enquiry</option>
           </select>
+        </div>
+
+        <!-- UPI Scanner -->
+        <div id="upi-scanner-container" style="display: none; flex-direction: column; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <p style="font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-bottom: 0.2rem;">Scan to pay via UPI</p>
+          <img src="scanner.jpeg" alt="UPI Scanner" style="width: 180px; max-width: 100%; border-radius: 8px; border: 1px solid var(--parchment); box-shadow: 0 4px 12px rgba(0,0,0,0.05);" />
         </div>
 
         <!-- Buttons row -->
