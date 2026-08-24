@@ -1397,17 +1397,7 @@ footer::before {
     <div class="about-visual reveal-up">
       <div class="about-image-frame">
         <div class="about-accent-tl"></div>
-        <video id="about-video" class="about-video" src="2.mp4?v=2" autoplay muted loop playsinline preload="auto"></video>
-        <button id="about-video-prev" class="video-arrow prev is-hidden" type="button" aria-label="Show previous video">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <button id="about-video-next" class="video-arrow next" type="button" aria-label="Show next video">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+        <video id="about-video" class="about-video" src="video.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="about-accent-br"></div>
       </div>
     </div>
@@ -1808,7 +1798,7 @@ footer::before {
   var aboutVideo = document.getElementById('about-video');
   var aboutVideoPrev = document.getElementById('about-video-prev');
   var aboutVideoNext = document.getElementById('about-video-next');
-  var aboutVideoSources = ['2.mp4?v=2', '3.mp4?v=2'];
+  var aboutVideoSources = ['video.mp4'];
   var aboutVideoIndex = 0;
   var images = [];
   var loaded = 0;
