@@ -8,6 +8,19 @@
     "dev": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
-  }
+    "express": "^4.19.2",
+    "jsdom": "^29.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavanasilks/Pavana-Silks-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pavanasilks/Pavana-Silks-website/issues"
+  },
+  "homepage": "https://github.com/pavanasilks/Pavana-Silks-website#readme"
 }
