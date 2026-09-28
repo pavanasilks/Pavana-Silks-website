@@ -1235,6 +1235,7 @@ const products = [
   },
   {
     id: "premium-silk-saree-21",
+    badge: "New Arrival",
     title: "Premium Handwoven Silk Cotton Saree",
     desc: "Pink with Burgundy Color Pure Silk Cotton Handloom saree with Triplet Korvai Border and Rich Pallu with Vairavoosi Butta!!!",
     price: "₹6,400",
@@ -1461,6 +1462,15 @@ function handleRouting() {
     showCatalog();
   }
 }
+
+// Initialize Page
+initCatalog();
+window.addEventListener('hashchange', handleRouting);
+// On Load Routing
+handleRouting();
+
+// CART STATE AND LOGIC
+let cart = [];
 
 function toggleCart() {
   const sidebar = document.getElementById('cart-sidebar');
