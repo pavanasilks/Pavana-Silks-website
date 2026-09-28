@@ -1441,16 +1441,27 @@ function handleRouting() {
   } else {
     showCatalog();
   }
-}
-
-// Initialize Page
-initCatalog();
-window.addEventListener('hashchange', handleRouting);
-// On Load Routing
-handleRouting();
-
-// CART STATE AND LOGIC
-let cart = [];
+},
+  {
+    id: "premium-silk-saree-21",
+    title: "Premium Handwoven Silk Cotton Saree",
+    description: "Pink with Burgundy Color Pure Silk Cotton Handloom saree with Triplet Korvai Border and Rich Pallu with Vairavoosi Butta!!!",
+    price: "6400/- + SHIPPING",
+    images: [
+      "https://res.cloudinary.com/rixydqqx/image/upload/v1790599088/ChatGPT_Image_Sep_28_2026_06_05_53_PM_nrc7zp.png",
+      "https://res.cloudinary.com/rixydqqx/image/upload/v1790599083/WhatsApp_Image_2026-09-28_at_5.39.30_PM_kjod8a.jpg",
+      "https://res.cloudinary.com/rixydqqx/image/upload/v1790599080/WhatsApp_Image_2026-09-28_at_5.39.31_PM_pkbue1.jpg",
+      "https://res.cloudinary.com/rixydqqx/image/upload/v1790599085/WhatsApp_Image_2026-09-28_at_5.39.31_PM_1_jc1vc9.jpg"
+    ],
+    whatsappText: "Hi Pavana Silks, I am interested in inquiring about the Premium Handwoven Silk Cotton Saree.",
+    details: {
+      "Material": "Silk Cotton",
+      "Zari Type": "Genuine Zari Brocade",
+      "Weave Craft": "Traditional Handloom",
+      "Care": "Dry clean only"
+    }
+  }
+];
 
 function toggleCart() {
   const sidebar = document.getElementById('cart-sidebar');
