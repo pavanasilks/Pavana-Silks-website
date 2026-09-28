@@ -1177,44 +1177,80 @@ footer::before {
   </div>
   <div style="position: relative; max-width: 1300px; margin: 0 auto; padding: 0 3rem;">
     <!-- Left Arrow -->
-    <button onclick="toggleFeaturesPage()" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid #C5A059; color: #C5A059; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 10;" onmouseover="this.style.background='#C5A059'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A059';">
+    <button onclick="scrollFeaturesPage(-1)" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid #C5A059; color: #C5A059; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 10;" onmouseover="this.style.background='#C5A059'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A059';">
       &larr;
     </button>
 
     <div style="overflow: hidden; width: 100%; padding: 1rem 0;">
-      <div id="features-carousel-track" style="display: flex; width: 200%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);">
-        <div style="width: 50%;">
-          <div class="features-grid" id="features-page-1">
+      <div id="features-carousel-track" style="display: flex; width: 500%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);">
+        <div style="width: 20%;">
+          <div class="features-grid">
             <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
-              <img id="feature-img-1" src="https://res.cloudinary.com/rixydqqx/image/upload/v1790152521/ChatGPT_Image_Sep_23_2026_02_03_48_PM_jds6hx.png" alt="Featured Saree 1" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790569468/ChatGPT_Image_Sep_28_2026_09_53_08_AM_ezag7v.png" alt="Featured Saree 1" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
             <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
-              <img id="feature-img-2" src="https://res.cloudinary.com/rixydqqx/image/upload/v1790153051/ChatGPT_Image_Sep_23_2026_02_12_12_PM_dkqe2a.png" alt="Featured Saree 2" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790570238/ChatGPT_Image_Sep_28_2026_10_06_57_AM_htfzwd.png" alt="Featured Saree 2" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
-            <div class="feature-card reveal-up" style="transition-delay:0.3s; padding: 0; overflow: hidden; height: 400px;">
-              <img id="feature-img-3" src="https://res.cloudinary.com/rixydqqx/image/upload/v1790154497/ChatGPT_Image_Sep_23_2026_02_38_04_PM_ikei5o.png" alt="Featured Saree 3" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            <div class="feature-card reveal-up" style="transition-delay:0.30000000000000004s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790570825/ChatGPT_Image_Sep_28_2026_10_16_23_AM_olbakr.png" alt="Featured Saree 3" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
           </div>
         </div>
-        
-        <div style="width: 50%;">
-          <div class="features-grid" id="features-page-2">
-            <div class="feature-card reveal-up" style="transition-delay:0.4s; padding: 0; overflow: hidden; height: 400px;">
-              <img id="feature-img-4" src="https://res.cloudinary.com/rixydqqx/image/upload/v1790154915/ChatGPT_Image_Sep_23_2026_02_44_55_PM_dxxhrh.png" alt="Featured Saree 4" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+        <div style="width: 20%;">
+          <div class="features-grid">
+            <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571284/ChatGPT_Image_Sep_28_2026_10_23_35_AM_rvm8js.png" alt="Featured Saree 4" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
-            <div class="feature-card reveal-up" style="transition-delay:0.5s; padding: 0; overflow: hidden; height: 400px;">
-              <img id="feature-img-5" src="https://res.cloudinary.com/rixydqqx/image/upload/v1790155402/ChatGPT_Image_Sep_23_2026_02_52_42_PM_vvpyop.png" alt="Featured Saree 5" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571707/ChatGPT_Image_Sep_28_2026_10_31_27_AM_upwx5e.png" alt="Featured Saree 5" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
-            <div class="feature-card reveal-up" style="transition-delay:0.6s; padding: 0; overflow: hidden; height: 400px;">
-              <img id="feature-img-6" src="https://res.cloudinary.com/rixydqqx/image/upload/v1790158011/ChatGPT_Image_Sep_23_2026_03_36_36_PM_pc9iub.png" alt="Featured Saree 6" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            <div class="feature-card reveal-up" style="transition-delay:0.30000000000000004s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572051/ChatGPT_Image_Sep_28_2026_10_37_07_AM_bxtysm.png" alt="Featured Saree 6" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
+          </div>
+        </div>
+        <div style="width: 20%;">
+          <div class="features-grid">
+            <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572398/ChatGPT_Image_Sep_28_2026_10_42_21_AM_svxya6.png" alt="Featured Saree 7" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572864/ChatGPT_Image_Sep_28_2026_10_50_32_AM_gqj8bc.png" alt="Featured Saree 8" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.30000000000000004s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790573240/ChatGPT_Image_Sep_28_2026_10_56_59_AM_hhkdwg.png" alt="Featured Saree 9" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+          </div>
+        </div>
+        <div style="width: 20%;">
+          <div class="features-grid">
+            <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790579720/ChatGPT_Image_Sep_28_2026_12_44_46_PM_g9sa1m.png" alt="Featured Saree 10" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790580273/ChatGPT_Image_Sep_28_2026_12_50_22_PM_qlum1r.png" alt="Featured Saree 11" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.30000000000000004s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790580760/ChatGPT_Image_Sep_28_2026_01_02_20_PM_ygh1tp.png" alt="Featured Saree 12" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+          </div>
+        </div>
+        <div style="width: 20%;">
+          <div class="features-grid">
+            <div class="feature-card reveal-up" style="transition-delay:0.1s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790581176/ChatGPT_Image_Sep_28_2026_01_09_17_PM_jf4a3p.png" alt="Featured Saree 13" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div class="feature-card reveal-up" style="transition-delay:0.2s; padding: 0; overflow: hidden; height: 400px;">
+              <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790581466/ChatGPT_Image_Sep_28_2026_01_13_58_PM_fngffn.png" alt="Featured Saree 14" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            </div>
+            <div style="visibility: hidden;"></div>
           </div>
         </div>
       </div>
     </div>
     
     <!-- Right Arrow -->
-    <button onclick="toggleFeaturesPage()" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid #C5A059; color: #C5A059; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 10;" onmouseover="this.style.background='#C5A059'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A059';">
+    <button onclick="scrollFeaturesPage(1)" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid #C5A059; color: #C5A059; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; z-index: 10;" onmouseover="this.style.background='#C5A059'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A059';">
       &rarr;
     </button>
   </div>
@@ -1240,7 +1276,7 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Premium Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>5500/- + SHIPPING</p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#classic-silk-saree-02'">
@@ -1248,7 +1284,7 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Classic Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>4700/- + SHIPPING</p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#elegant-silk-saree-03'">
@@ -1256,7 +1292,7 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Elegant Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>4700/- + SHIPPING</p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#exquisite-silk-saree-04'">
@@ -1264,7 +1300,7 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Exquisite Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>5900/- + SHIPPING</p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#majestic-silk-saree-05'">
@@ -1272,7 +1308,7 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Majestic Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>5900/- + SHIPPING</p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#royal-silk-saree-06'">
@@ -1280,7 +1316,7 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Royal Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>7200/- + SHIPPING</p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#divine-silk-saree-07'">
@@ -1288,7 +1324,7 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Divine Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>5900/- + SHIPPING</p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#radiant-silk-saree-08'">
@@ -1296,15 +1332,103 @@ footer::before {
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Radiant Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <p>5900/- + SHIPPING</p>
         </div>
       </div>
-      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#ethereal-silk-saree-09'">
-        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790570816/WhatsApp_Image_2026-09-28_at_10.12.42_AM_zwvfi8.jpg" alt="Ethereal Handwoven Silk Saree" class="saree-img" />
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#lustrous-silk-saree-09'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790570816/WhatsApp_Image_2026-09-28_at_10.12.42_AM_zwvfi8.jpg" alt="Lustrous Handwoven Silk Saree" class="saree-img" />
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
-          <h4>Ethereal Handwoven Silk Saree</h4>
-          <p>Price on Enquiry</p>
+          <h4>Lustrous Handwoven Silk Saree</h4>
+          <p>5500/- + SHIPPING</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#gorgeous-silk-saree-10'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571272/WhatsApp_Image_2026-09-28_at_10.19.11_AM_gl8muq.jpg" alt="Gorgeous Handwoven Silk Saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Gorgeous Handwoven Silk Saree</h4>
+          <p>6600/- + SHIPPING</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#elegant-silk-saree-11'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571704/WhatsApp_Image_2026-09-28_at_10.28.57_AM_x1h2kd.jpg" alt="Elegant Handwoven Silk Saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Elegant Handwoven Silk Saree</h4>
+          <p>5900/- + SHIPPING</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#classic-silk-saree-12'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572053/WhatsApp_Image_2026-09-28_at_10.33.51_AM_wir1xh.jpg" alt="Classic Handwoven Silk Saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Classic Handwoven Silk Saree</h4>
+          <p>6200/- + SHIPPING</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#regal-silk-saree-13'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572395/WhatsApp_Image_2026-09-28_at_10.37.00_AM_fbzygx.jpg" alt="Regal Handwoven Silk Saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Regal Handwoven Silk Saree</h4>
+          <p>4900/- + SHIPPING</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#alluring-silk-saree-14'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572862/WhatsApp_Image_2026-09-28_at_10.45.52_AM_ds4wc4.jpg" alt="Alluring Handwoven Silk Saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Alluring Handwoven Silk Saree</h4>
+          <p>5000/- + SHIPPING</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#vibrant-silk-saree-15'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790573239/WhatsApp_Image_2026-09-28_at_10.53.59_AM_spcut9.jpg" alt="Vibrant Handwoven Silk Saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Vibrant Handwoven Silk Saree</h4>
+          <p>5500/- + SHIPPING</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#enchanting-silk-saree-16'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790579718/WhatsApp_Image_2026-09-28_at_12.39.41_PM_1_kbvjdq.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Pure Silk Cotton Handloom saree with Rich Korvai Border</h4>
+          <p>₹5,900</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#glorious-silk-saree-17'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790580269/WhatsApp_Image_2026-09-28_at_12.39.43_PM_dxpkww.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Pure Silk Cotton Handloom saree with Rich Korvai Border</h4>
+          <p>₹5,900</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#stunning-silk-saree-18'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790580758/WhatsApp_Image_2026-09-28_at_12.39.42_PM_1_lnzsc1.jpg" alt="Parrot green with Purple Pure Silk Cotton Handloom saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Parrot green with Purple Pure Silk Cotton Handloom saree</h4>
+          <p>₹4,900</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#captivating-silk-saree-19'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790581175/WhatsApp_Image_2026-09-28_at_12.39.42_PM_2_o8jmwr.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Pure Silk Cotton Handloom saree with Rich Korvai Border</h4>
+          <p>₹5,900</p>
+        </div>
+      </div>
+      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#magnificent-silk-saree-20'">
+        <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790581465/WhatsApp_Image_2026-09-28_at_12.09.40_PM_hohpx4.jpg" alt="Purple with Pink Pure Silk Cotton Handloom saree" class="saree-img" />
+        <div class="saree-card-overlay"></div>
+        <div class="saree-card-info">
+          <h4>Purple with Pink Pure Silk Cotton Handloom saree</h4>
+          <p>₹6,600</p>
         </div>
       </div>
     </div>
@@ -1489,11 +1613,110 @@ footer::before {
       </div>
       <div class="saree-slide">
         <div class="saree-slide-img-wrap">
-          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790570816/WhatsApp_Image_2026-09-28_at_10.12.42_AM_zwvfi8.jpg" alt="Ethereal Handwoven Silk Saree" />
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790570816/WhatsApp_Image_2026-09-28_at_10.12.42_AM_zwvfi8.jpg" alt="Lustrous Handwoven Silk Saree" />
         </div>
         <div class="saree-slide-content">
-          <h3 class="saree-slide-title">Ethereal Handwoven Silk Saree</h3>
-          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#ethereal-silk-saree-09'">View Details</button>
+          <h3 class="saree-slide-title">Lustrous Handwoven Silk Saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#lustrous-silk-saree-09'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571272/WhatsApp_Image_2026-09-28_at_10.19.11_AM_gl8muq.jpg" alt="Gorgeous Handwoven Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Gorgeous Handwoven Silk Saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#gorgeous-silk-saree-10'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571704/WhatsApp_Image_2026-09-28_at_10.28.57_AM_x1h2kd.jpg" alt="Elegant Handwoven Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Elegant Handwoven Silk Saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#elegant-silk-saree-11'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572053/WhatsApp_Image_2026-09-28_at_10.33.51_AM_wir1xh.jpg" alt="Classic Handwoven Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Classic Handwoven Silk Saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#classic-silk-saree-12'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572395/WhatsApp_Image_2026-09-28_at_10.37.00_AM_fbzygx.jpg" alt="Regal Handwoven Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Regal Handwoven Silk Saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#regal-silk-saree-13'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572862/WhatsApp_Image_2026-09-28_at_10.45.52_AM_ds4wc4.jpg" alt="Alluring Handwoven Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Alluring Handwoven Silk Saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#alluring-silk-saree-14'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790573239/WhatsApp_Image_2026-09-28_at_10.53.59_AM_spcut9.jpg" alt="Vibrant Handwoven Silk Saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Vibrant Handwoven Silk Saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#vibrant-silk-saree-15'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790579718/WhatsApp_Image_2026-09-28_at_12.39.41_PM_1_kbvjdq.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Pure Silk Cotton Handloom saree with Rich Korvai Border</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#enchanting-silk-saree-16'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790580269/WhatsApp_Image_2026-09-28_at_12.39.43_PM_dxpkww.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Pure Silk Cotton Handloom saree with Rich Korvai Border</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#glorious-silk-saree-17'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790580758/WhatsApp_Image_2026-09-28_at_12.39.42_PM_1_lnzsc1.jpg" alt="Parrot green with Purple Pure Silk Cotton Handloom saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Parrot green with Purple Pure Silk Cotton Handloom saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#stunning-silk-saree-18'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790581175/WhatsApp_Image_2026-09-28_at_12.39.42_PM_2_o8jmwr.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Pure Silk Cotton Handloom saree with Rich Korvai Border</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#captivating-silk-saree-19'">View Details</button>
+        </div>
+      </div>
+      <div class="saree-slide">
+        <div class="saree-slide-img-wrap">
+          <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790581465/WhatsApp_Image_2026-09-28_at_12.09.40_PM_hohpx4.jpg" alt="Purple with Pink Pure Silk Cotton Handloom saree" />
+        </div>
+        <div class="saree-slide-content">
+          <h3 class="saree-slide-title">Purple with Pink Pure Silk Cotton Handloom saree</h3>
+          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#magnificent-silk-saree-20'">View Details</button>
         </div>
       </div>
     </div>
@@ -2566,12 +2789,15 @@ footer::before {
       return message;
     }
 
-    let isFeaturesPage1 = true;
-    function toggleFeaturesPage() {
+    let currentFeaturePage = 0;
+    const totalFeaturePages = 5;
+    function scrollFeaturesPage(direction) {
       const track = document.getElementById('features-carousel-track');
       if (track) {
-        isFeaturesPage1 = !isFeaturesPage1;
-        track.style.transform = isFeaturesPage1 ? 'translateX(0)' : 'translateX(-50%)';
+        currentFeaturePage += direction;
+        if (currentFeaturePage < 0) currentFeaturePage = totalFeaturePages - 1;
+        if (currentFeaturePage >= totalFeaturePages) currentFeaturePage = 0;
+        track.style.transform = `translateX(-${currentFeaturePage * (100 / totalFeaturePages)}%)`;
       }
     }
 
