@@ -1509,8 +1509,10 @@ function updateGalleryStatus() {
   thumbs.forEach((thumb, idx) => {
     if (idx === currentIndex) {
       thumb.classList.add('active');
-      // Scroll thumb into view
-      thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      // Scroll thumb into view without affecting vertical page scroll
+      const container = thumbGrid;
+      const scrollLeft = thumb.offsetLeft - (container.clientWidth / 2) + (thumb.clientWidth / 2);
+      container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
     } else {
       thumb.classList.remove('active');
     }
