@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Pavana Silks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    :root {
+      --primary: #5C3A1E; /* Warm brown from website theme */
+      --primary-hover: #B8912A; /* Gold hover */
+      --border: #d9d9d9;
+      --bg-right: #fafafa;
+      --text-main: #333333;
+      --text-muted: #737373;
+      --focus-color: #1E1208;
+      --error-color: #dd1d1d;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    /* Layout structure */
+    .checkout-container {
+      display: flex;
+      flex-direction: column-reverse;
+      flex: 1;
+    }
+    .left-col {
+      padding: 2rem 1rem;
+      background: #ffffff;
+      flex: 1;
+    }
+    .right-col {
+      padding: 2rem 1rem;
+      background: var(--bg-right);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .mobile-summary-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      background: var(--bg-right);
+      border-bottom: 1px solid var(--border);
+      color: var(--primary);
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .mobile-summary-toggle span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    @media(min-width: 1000px) {
+      .checkout-container {
+        flex-direction: row;
+      }
+      .mobile-summary-toggle {
+        display: none;
+      }
+      .left-col {
+        flex: 1.1;
+        padding: 4rem 5% 4rem 10%;
+        border-right: 1px solid var(--border);
+      }
+      .right-col {
+        flex: 0.9;
+        padding: 4rem 10% 4rem 4%;
+        border-bottom: none;
+      }
+    }
+
+    .brand-logo {
+      display: block;
+      width: 150px;
+      margin: 0 auto 2rem auto;
+    }
+    @media(min-width: 1000px) {
+      .brand-logo {
+        margin: 0 0 2rem 0;
+      }
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    /* Floating Labels for Inputs */
+    .form-group {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+    .form-row > .form-group {
+      flex: 1;
+    }
+    
+    .floating-input {
+      width: 100%;
+      padding: 1.2rem 0.8rem 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .floating-input:focus {
+      border-color: var(--focus-color);
+      box-shadow: 0 0 0 1px var(--focus-color);
+    }
+    
+    .floating-label {
+      position: absolute;
+      top: 50%;
+      left: 0.8rem;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+      transition: 0.2s ease all;
+    }
+
+    /* Trigger floating label on focus or if input is not empty */
+    .floating-input:focus ~ .floating-label,
+    .floating-input:not(:placeholder-shown) ~ .floating-label {
+      top: 0.6rem;
+      font-size: 0.7rem;
+    }
+
+    /* Select floating label */
+    .floating-select {
+      width: 100%;
+      padding: 1.2rem 0.8rem 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      background: #fff;
+      appearance: none;
+    }
+    .floating-select:focus {
+      border-color: var(--focus-color);
+      box-shadow: 0 0 0 1px var(--focus-color);
+    }
+    .select-label {
+      position: absolute;
+      top: 0.4rem;
+      left: 0.8rem;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      pointer-events: none;
+    }
+    .select-arrow {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    .checkbox-group input {
+      width: 1.1rem;
+      height: 1.1rem;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Payment Box */
+    .payment-box {
+      border: 1px solid var(--focus-color);
+      border-radius: 4px;
+      background: #fcf9fa;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .payment-header {
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      background: #fff;
+    }
+    .payment-body {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .card-icons {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    /* Billing Box */
+    .billing-box {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      background: #fff;
+    }
+    .billing-option {
+      padding: 1.2rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+    }
+    .billing-option:first-child {
+      border-bottom: 1px solid var(--border);
+    }
+    .billing-option input[type="radio"] {
+      accent-color: var(--primary);
+      transform: scale(1.2);
+    }
+
+    /* Pay Button */
+    .btn-pay {
+      width: 100%;
+      padding: 1.2rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-pay:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Order Summary Styles */
+    .order-summary-wrapper {
+      max-width: 450px;
+      margin: 0 auto;
+      position: sticky;
+      top: 2rem;
+    }
+    .order-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    .action-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+    .return-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: opacity 0.2s;
+    }
+    .return-link:hover {
+      opacity: 0.8;
+    }
+    
+    @media(max-width: 600px) {
+      .action-footer {
+        flex-direction: column-reverse;
+        gap: 1.5rem;
+      }
+      .btn-pay {
+        width: 100% !important;
+      }
+    }
+
+    .item-img-wrapper {
+      position: relative;
+      width: 65px;
+      height: 65px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 8px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .item-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      border-radius: 7px;
+      object-fit: cover;
+    }
+    .item-qty {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: rgba(114,114,114,0.9);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .item-details {
+      flex: 1;
+    }
+    .item-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .item-price {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .discount-row {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .discount-input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      outline: none;
+      font-family: inherit;
+    }
+    .discount-input:focus {
+      border-color: var(--focus-color);
+      box-shadow: 0 0 0 1px var(--focus-color);
+    }
+    .btn-apply {
+      padding: 0 1.5rem;
+      background: #ebebeb;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-muted);
+      cursor: not-allowed;
+      font-weight: 500;
+    }
+    .totals-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .totals-row.final {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      color: var(--text-main);
+      font-weight: 500;
+      align-items: center;
+    }
+    .currency {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-right: 0.3rem;
+    }
+
+    .footer-links {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .footer-links a {
+      color: inherit;
+      text-decoration: none;
+      margin-right: 1.2rem;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    #right-col-content {
+      display: block;
+    }
+    @media(max-width: 999px) {
+      #right-col-content {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile toggle for order summary -->
+  <div class="mobile-summary-toggle" onclick="document.getElementById('right-col-content').style.display = document.getElementById('right-col-content').style.display === 'block' ? 'none' : 'block'">
+    <span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      Show order summary
+    </span>
+    <strong id="mobile-total-val">₹0.00</strong>
+  </div>
+
+  <div class="checkout-container">
+    
+    <!-- Left Column (Form) -->
+    <div class="left-col">
+      <div style="max-width: 550px; margin: 0 auto;">
+        
+        <!-- Logo -->
+        <a href="/new-arrivals">
+          <img src="/pavana-logo.png" alt="Pavana Silks" class="brand-logo" onerror="this.src='https://via.placeholder.com/150x50?text=Pavana+Silks'; this.style.borderRadius='8px';" />
+        </a>
+        
+        <form id="checkout-form" onsubmit="handleCheckout(event)">
+          
+          <!-- Contact -->
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+            <h2>Contact</h2>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" class="floating-input" required placeholder=" " />
+            <label class="floating-label">Email</label>
+          </div>
+          <label class="checkbox-group" style="margin-bottom: 2.5rem;">
+            <input type="checkbox" id="news" checked />
+            Email me with news and offers
+          </label>
+
+          <!-- Delivery -->
+          <h2>Delivery</h2>
+          <div class="form-group">
+            <select id="country" class="floating-select">
+              <option value="India">India</option>
+            </select>
+            <label class="select-label">Country/Region</label>
+            <svg class="select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="fname" class="floating-input" required placeholder=" " />
+              <label class="floating-label">First name</label>
+            </div>
+            <div class="form-group">
+              <input type="text" id="lname" class="floating-input" required placeholder=" " />
+              <label class="floating-label">Last name</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" id="address" class="floating-input" required placeholder=" " />
+            <label class="floating-label">Address</label>
+          </div>
+          <div class="form-group">
+            <input type="text" id="apartment" class="floating-input" placeholder=" " />
+            <label class="floating-label">Apartment, suite, etc. (optional)</label>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="city" class="floating-input" required placeholder=" " />
+              <label class="floating-label">City</label>
+            </div>
+            <div class="form-group">
+              <select id="state" class="floating-select">
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Other">Other</option>
+              </select>
+              <label class="select-label">State</label>
+              <svg class="select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <div class="form-group">
+              <input type="text" id="pincode" class="floating-input" required placeholder=" " />
+              <label class="floating-label">PIN code</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="tel" id="phone" class="floating-input" required placeholder=" " />
+            <label class="floating-label">Phone</label>
+          </div>
+          <label class="checkbox-group" style="margin-bottom: 2.5rem;">
+            <input type="checkbox" id="save-info" />
+            Save this information for next time
+          </label>
+
+          <!-- Payment -->
+          <h2>Payment</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">All transactions are secure and encrypted.</p>
+          
+          <div class="payment-box">
+            <div class="payment-header">
+              <span>Razorpay</span>
+              <div class="card-icons">
+                <img src="https://cdn.razorpay.com/static/assets/pay_methods_branding.png" alt="Cards" style="height:22px; object-fit: contain;">
+              </div>
+            </div>
+            <div class="payment-body">
+              <svg style="width: 48px; height: 48px; margin-bottom: 1rem; color: #8f8f8f;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+              <p>You'll be redirected to Razorpay to complete your purchase.</p>
+            </div>
+          </div>
+          <div class="action-footer">
+            <a href="/new-arrivals" class="return-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              Return to store
+            </a>
+            <button type="submit" class="btn-pay" id="pay-btn" style="width: auto; padding-left: 2rem; padding-right: 2rem;">
+              Pay now
+            </button>
+          </div>
+        </form>
+
+        <div class="footer-links">
+          <a href="#">Refund policy</a>
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of service</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column (Order Summary) -->
+    <div class="right-col" id="right-col-content">
+      <div class="order-summary-wrapper">
+        
+        <div id="order-items">
+          <!-- Items injected via JS -->
+        </div>
+
+        <div class="discount-row">
+          <input type="text" class="discount-input" placeholder="Discount code or gift card" />
+          <button class="btn-apply" disabled>Apply</button>
+        </div>
+
+        <div class="totals-row">
+          <span>Subtotal</span>
+          <span id="subtotal-val">₹0.00</span>
+        </div>
+        <div class="totals-row">
+          <span>Shipping</span>
+          <span id="shipping-val">Enter shipping address</span>
+        </div>
+        <div class="totals-row final">
+          <span>Total</span>
+          <div>
+            <span class="currency">INR</span>
+            <span id="total-val">₹0.00</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let checkoutData = [];
+    let totalPrice = 0;
+    let productNamesForNotes = "";
+
+    function parsePriceSafely(priceVal) {
+      if (!priceVal) return 5000;
+      let str = priceVal.toString();
+      let num = parseInt(str.replace(/\D/g, ''), 10);
+      if (isNaN(num) || num === 0) return 5000; // Safe fallback to 5000
+      return num;
+    }
+
+    function loadCheckoutData() {
+      try {
+        const stored = localStorage.getItem('checkoutData');
+        if (stored) {
+          checkoutData = JSON.parse(stored);
+        }
+      } catch(e) {
+        console.error("Error loading checkout data", e);
+      }
+
+      // If missing or malformed, bounce back
+      if (!checkoutData || !Array.isArray(checkoutData) || checkoutData.length === 0) {
+        alert("Your cart is empty. Please add items to cart first.");
+        window.location.href = '/new-arrivals';
+        return;
+      }
+
+      const orderItemsContainer = document.getElementById('order-items');
+      orderItemsContainer.innerHTML = '';
+      totalPrice = 0;
+
+      checkoutData.forEach(item => {
+        let num = parsePriceSafely(item.price);
+        let qty = parseInt(item.qty) || 1;
+        const lineTotal = num * qty;
+        totalPrice += lineTotal;
+
+        const el = document.createElement('div');
+        el.className = 'order-item';
+        el.innerHTML = `
+          <div class="item-img-wrapper">
+            <img src="${item.image || '/pavana-logo.png'}" alt="${item.name}" onerror="this.src='/pavana-logo.png';" />
+            <div class="item-qty">${qty}</div>
+          </div>
+          <div class="item-details">
+            <div class="item-name">${item.name}</div>
+          </div>
+          <div class="item-price">₹${lineTotal.toLocaleString('en-IN')}.00</div>
+        `;
+        orderItemsContainer.appendChild(el);
+      });
+
+      productNamesForNotes = checkoutData.map(i => i.name).join(', ');
+
+      const formattedTotal = '₹' + totalPrice.toLocaleString('en-IN') + '.00';
+      document.getElementById('subtotal-val').textContent = formattedTotal;
+      document.getElementById('total-val').textContent = formattedTotal;
+      document.getElementById('mobile-total-val').textContent = formattedTotal;
+    }
+
+    loadCheckoutData();
+
+    async function handleCheckout(event) {
+      event.preventDefault();
+      
+      if (totalPrice === 0) {
+          alert("Invalid cart total.");
+          return;
+      }
+
+      const btn = document.getElementById('pay-btn');
+      btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg> Processing...';
+      btn.style.opacity = "0.8";
+      btn.disabled = true;
+
+      const email = document.getElementById('email').value;
+      const fname = document.getElementById('fname').value;
+      const lname = document.getElementById('lname').value;
+      const address = document.getElementById('address').value;
+      const apartment = document.getElementById('apartment').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+      const pincode = document.getElementById('pincode').value;
+      const phone = document.getElementById('phone').value;
+
+      const fullName = fname + " " + lname;
+      const fullAddress = address + (apartment ? ", " + apartment : "");
+
+      try {
+        // 1. Fetch Razorpay Key
+        const keyRes = await fetch('/get-razorpay-key');
+        const keyData = await keyRes.json();
+        const rzpKey = keyData.key;
+
+        if (!rzpKey) throw new Error("Razorpay key not found");
+
+        // 2. Create Order
+        const orderRes = await fetch('/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                amount: totalPrice, 
+                receipt: "rcpt_" + Date.now(),
+                notes: {
+                    Product: productNamesForNotes,
+                    Name: fullName,
+                    Email: email,
+                    Phone: phone,
+                    Address: fullAddress,
+                    City: city,
+                    State: state,
+                    Pincode: pincode
+                }
+            })
+        });
+        const orderData = await orderRes.json();
+        
+        if (!orderData.id) {
+            alert("Failed to create order. Please try again.");
+            resetBtn(btn);
+            return;
+        }
+
+        // 3. Open Razorpay Checkout
+        var options = {
+            "key": rzpKey,
+            "amount": orderData.amount,
+            "currency": orderData.currency,
+            "name": "Pavana Silks",
+            "description": "Secure Checkout",
+            "order_id": orderData.id,
+            "handler": async function (response){
+                // 4. Verify Payment
+                try {
+                    const verifyRes = await fetch('/verify-payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature
+                        })
+                    });
+                    const verifyData = await verifyRes.json();
+                    if(verifyData.success) {
+                        
+                        // WhatsApp notification trigger
+                        const msg = `*✅ PAID ORDER! (Razorpay)* 🛍️\n` +
+                                    `-----------------------------------\n` +
+                                    `*Products:* ${productNamesForNotes}\n` +
+                                    `*Amount Paid:* Rs. ${totalPrice}\n` +
+                                    `*Payment ID:* ${response.razorpay_payment_id}\n\n` +
+                                    `*Customer Details:*\n` +
+                                    `• *Name:* ${fullName}\n` +
+                                    `• *Email:* ${email}\n` +
+                                    `• *Phone:* ${phone}\n\n` +
+                                    `*Delivery Address:*\n` +
+                                    `${fullAddress},\n` +
+                                    `${city}, ${state} - ${pincode}`;
+                        
+                        alert("Payment Successful! We are redirecting you to WhatsApp to confirm your order.");
+                        localStorage.removeItem('checkoutData');
+                        localStorage.removeItem('pavana_cart'); // Clear cart
+                        window.location.replace(`https://wa.me/918667570740?text=${encodeURIComponent(msg)}`);
+                        
+                    } else {
+                        alert("Payment Verification Failed!");
+                        resetBtn(btn);
+                    }
+                } catch (e) {
+                    console.error(e);
+                    alert("Error verifying payment.");
+                    resetBtn(btn);
+                }
+            },
+            "prefill": {
+                "name": fullName,
+                "email": email,
+                "contact": phone
+            },
+            "theme": {
+                "color": "#6b193d"
+            },
+            "modal": {
+                "ondismiss": function(){
+                    resetBtn(btn);
+                }
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response){
+            alert("Payment Failed: " + response.error.description);
+            resetBtn(btn);
+        });
+        rzp1.open();
+      } catch (err) {
+        console.error("Payment error", err);
+        alert("Error initiating payment. Please try again.");
+        resetBtn(btn);
+      }
+    }
+
+    function resetBtn(btn) {
+      btn.innerHTML = "Pay now";
+      btn.style.opacity = "1";
+      btn.disabled = false;
+    }
+  </script>
+  <style>
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</body>
+</html>

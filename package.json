@@ -8,8 +8,10 @@
     "dev": "node server.js"
   },
   "dependencies": {
+    "dotenv": "^18.0.4",
     "express": "^4.19.2",
-    "jsdom": "^29.1.1"
+    "jsdom": "^29.1.1",
+    "razorpay": "^2.9.8"
   },
   "repository": {
     "type": "git",

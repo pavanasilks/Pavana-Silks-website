@@ -626,6 +626,7 @@ footer {
   .catalog-container { padding: 7rem 1.2rem 3rem; }
 }
 </style>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
@@ -726,7 +727,7 @@ footer {
         <button id="addToCartBtn" style="flex: 1; padding: 1.1rem; border: 1px solid var(--gold); background: none; color: var(--gold); font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 4px;" onmouseover="this.style.background='rgba(184,145,42,0.05)';" onmouseout="this.style.background='none';">
           Add to Cart
         </button>
-        <button id="buyNowBtn" style="flex: 1; padding: 1.1rem; border: none; background: var(--text-dark); color: #fff; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 4px;" onmouseover="this.style.background='var(--warm-brown)';" onmouseout="this.style.background='var(--text-dark)';">
+        <button id="buyNowBtn" style="flex: 1; padding: 1.1rem; border: none; background: var(--warm-brown); color: #fff; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 4px;" onmouseover="this.style.background='var(--gold)';" onmouseout="this.style.background='var(--warm-brown)';">
           Buy Now
         </button>
       </div>
@@ -1386,13 +1387,16 @@ function initCatalog() {
     catalogGrid.appendChild(card);
   });
 }
+let savedScrollPosition = 0;
 
 function showCatalog() {
   stopAutoSlide();
   productDetailView.style.display = 'none';
   catalogView.style.display = 'block';
   document.title = "New Arrivals — Pavana Silks";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
+  
   if (window.location.hash) {
     history.pushState("", document.title, window.location.pathname + window.location.search);
   }
@@ -1403,6 +1407,10 @@ function showProduct(id, isManual = false) {
   if (!p) {
     showCatalog();
     return;
+  }
+  
+  if (catalogView.style.display !== 'none') {
+    savedScrollPosition = window.scrollY || document.documentElement.scrollTop;
   }
   
   catalogView.style.display = 'none';
@@ -1421,7 +1429,7 @@ function showProduct(id, isManual = false) {
   
   whatsappLink.href = `https://wa.me/918667570740?text=${encodeURIComponent(p.whatsappText)}`;
   document.getElementById('addToCartBtn').onclick = () => addToCart(p.title, p.images[0]);
-  document.getElementById('buyNowBtn').onclick = () => buyNow(p.title);
+  document.getElementById('buyNowBtn').onclick = () => buyNow(p.title, p.price);
   
   // Populate Specs
   specTable.innerHTML = '';
@@ -1654,16 +1662,34 @@ function updateCartUI() {
 function checkoutFromCart() {
   if (cart.length === 0) return;
   toggleCart();
-  const names = cart.map(item => `${item.name} (Qty: ${item.qty})`).join(', ');
-  document.getElementById('checkout-product-name').value = names;
-  document.getElementById('checkout-product-title').textContent = names;
-  document.getElementById('checkout-modal').style.display = 'flex';
+  
+  const checkoutData = cart.map(item => {
+      const p = products.find(prod => prod.title === item.name);
+      const img = p && p.images && p.images.length > 0 ? p.images[0] : '';
+      const priceStr = (typeof item.price === 'number') ? String(item.price) : item.price;
+      return {
+          name: item.name,
+          qty: item.qty,
+          image: img,
+          price: priceStr
+      };
+  });
+  
+  localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+  window.location.href = '/checkout';
 }
 
-function buyNow(productName) {
-  document.getElementById('checkout-product-name').value = productName;
-  document.getElementById('checkout-product-title').textContent = productName;
-  document.getElementById('checkout-modal').style.display = 'flex';
+function buyNow(productName, productPrice = '0') {
+  const p = products.find(prod => prod.title === productName);
+  const img = p && p.images && p.images.length > 0 ? p.images[0] : '';
+  const checkoutData = [{
+    name: productName,
+    qty: 1,
+    image: img,
+    price: productPrice
+  }];
+  localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+  window.location.href = '/checkout';
 }
 
 window.closeCheckoutModal = function() {
@@ -1673,10 +1699,11 @@ window.closeCheckoutModal = function() {
   if (upiScanner) upiScanner.style.display = 'none';
 };
 
-function submitOrder(event) {
+async function submitOrder(event) {
   event.preventDefault();
   
   const productName = document.getElementById('checkout-product-name').value;
+  const productPriceStr = document.getElementById('checkout-product-price').value;
   const name = document.getElementById('cust-name').value;
   const phone = document.getElementById('cust-phone').value;
   const address = document.getElementById('cust-address').value;
@@ -1684,10 +1711,118 @@ function submitOrder(event) {
   const pincode = document.getElementById('cust-pincode').value;
   const payment = document.getElementById('cust-payment').value;
   
+  // Parse numeric price (e.g. "5500/- + SHIPPING" -> 5500)
+  let numericPrice = parseInt(productPriceStr.replace(/\D/g, ''), 10);
+  if (isNaN(numericPrice)) numericPrice = 5000; // Fallback price
+  
+  if (payment === 'Online Payment (Razorpay)') {
+      // 1. Fetch Razorpay Key
+      let rzpKey = 'rzp_test_YOUR_KEY_HERE';
+      try {
+          const keyRes = await fetch('/get-razorpay-key');
+          const keyData = await keyRes.json();
+          rzpKey = keyData.key;
+      } catch (err) { console.error("Could not fetch key", err); }
+
+      // 2. Create Order
+      showToast("Initializing Secure Payment...");
+      try {
+          const orderRes = await fetch('/create-order', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ 
+                  amount: numericPrice, 
+                  receipt: "rcpt_" + Date.now(),
+                  notes: {
+                      Product: productName,
+                      Name: name,
+                      Phone: phone,
+                      Address: address,
+                      City: city,
+                      Pincode: pincode
+                  }
+              })
+          });
+          const orderData = await orderRes.json();
+          
+          if (!orderData.id) {
+              alert("Failed to create order. Please try again.");
+              return;
+          }
+
+          // 3. Open Razorpay Checkout
+          var options = {
+              "key": rzpKey,
+              "amount": orderData.amount,
+              "currency": orderData.currency,
+              "name": "Pavana Silks",
+              "description": productName,
+              "order_id": orderData.id,
+              "handler": async function (response){
+                  // 4. Verify Payment
+                  try {
+                      const verifyRes = await fetch('/verify-payment', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                              razorpay_order_id: response.razorpay_order_id,
+                              razorpay_payment_id: response.razorpay_payment_id,
+                              razorpay_signature: response.razorpay_signature
+                          })
+                      });
+                      const verifyData = await verifyRes.json();
+                      if(verifyData.success) {
+                          // Trigger WhatsApp notification for the seller
+                          const msg = `*✅ PAID ORDER! (Razorpay)* 🛍️\n` +
+                                      `-----------------------------------\n` +
+                                      `*Product:* ${productName}\n` +
+                                      `*Amount Paid:* Rs. ${numericPrice}\n` +
+                                      `*Payment ID:* ${response.razorpay_payment_id}\n\n` +
+                                      `*Customer Details:*\n` +
+                                      `• *Name:* ${name}\n` +
+                                      `• *Phone:* ${phone}\n\n` +
+                                      `*Delivery Address:*\n` +
+                                      `${address},\n` +
+                                      `${city} - ${pincode}`;
+                                      
+                          showToast("Payment Successful! Opening WhatsApp...");
+                          setTimeout(() => {
+                              window.open(`https://wa.me/918667570740?text=${encodeURIComponent(msg)}`, '_blank');
+                              closeCheckoutModal();
+                          }, 1000);
+                      } else {
+                          alert("Payment Verification Failed!");
+                      }
+                  } catch (e) {
+                      console.error(e);
+                      alert("Error verifying payment.");
+                  }
+              },
+              "prefill": {
+                  "name": name,
+                  "contact": phone
+              },
+              "theme": {
+                  "color": "#C3A353"
+              }
+          };
+          var rzp1 = new Razorpay(options);
+          rzp1.on('payment.failed', function (response){
+              alert("Payment Failed: " + response.error.description);
+          });
+          rzp1.open();
+      } catch (err) {
+          console.error(err);
+          alert("Error initiating payment");
+      }
+      return;
+  }
+  
+  // WhatsApp Flow (for COD or Manual UPI)
   const msg = `*New Order Placed!* 🛍️\n` +
               `-----------------------------------\n` +
               `*Product:* ${productName}\n` +
-              `*Price:* Price on Enquiry\n\n` +
+              `*Price:* ${productPriceStr}\n\n` +
               `*Customer Details:*\n` +
               `• *Name:* ${name}\n` +
               `• *Phone:* ${phone}\n\n` +
@@ -1698,8 +1833,8 @@ function submitOrder(event) {
               
   showToast("Order placed! Opening WhatsApp to share details...");
   
-  setTimeout(function() {
-    window.open("https://wa.me/918667570740?text=" + encodeURIComponent(msg), "_blank");
+  setTimeout(() => {
+    window.open(`https://wa.me/918667570740?text=${encodeURIComponent(msg)}`, '_blank');
     closeCheckoutModal();
   }, 1500);
 }
@@ -1750,6 +1885,7 @@ function showToast(message) {
 
       <form id="checkout-form" onsubmit="submitOrder(event)" style="display: flex; flex-direction: column; gap: 1.2rem;">
         <input type="hidden" id="checkout-product-name" />
+        <input type="hidden" id="checkout-product-price" />
         
         <!-- Name -->
         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
@@ -1784,16 +1920,9 @@ function showToast(message) {
         <!-- Payment Method -->
         <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.5rem;">
           <label style="font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-mid);">Payment Method</label>
-          <select id="cust-payment" onchange="document.getElementById('upi-scanner-container').style.display = (this.value === 'UPI / Online Transfer Enquiry' ? 'flex' : 'none')" style="width: 100%; padding: 0.8rem; border: 1px solid var(--parchment); border-radius: 4px; background: #fff; font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text-dark); outline: none;">
-            <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
-            <option value="UPI / Online Transfer Enquiry">UPI / Online Transfer Enquiry</option>
+          <select id="cust-payment" style="width: 100%; padding: 0.8rem; border: 1px solid var(--parchment); border-radius: 4px; background: #fff; font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text-dark); outline: none;">
+            <option value="Online Payment (Razorpay)">Online Payment (Razorpay)</option>
           </select>
-        </div>
-
-        <!-- UPI Scanner -->
-        <div id="upi-scanner-container" style="display: none; flex-direction: column; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-          <p style="font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-bottom: 0.2rem;">Scan to pay via UPI</p>
-          <img src="scanner.jpeg" alt="UPI Scanner" style="width: 180px; max-width: 100%; border-radius: 8px; border: 1px solid var(--parchment); box-shadow: 0 4px 12px rgba(0,0,0,0.05);" />
         </div>
 
         <!-- Buttons row -->
