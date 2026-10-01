@@ -18,6 +18,16 @@ app.get('/new-arrivals', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'new-arrivals.html'));
 });
 
+// Route for Returns & Replacements
+app.get('/return', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'return.html'));
+});
+
+// Route for My Orders
+app.get('/orders', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'orders.html'));
+});
+
 // Route for Bestsellers page
 app.get('/bestsellers', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'bestsellers.html'));

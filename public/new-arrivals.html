@@ -639,6 +639,7 @@ footer {
     <li><a href="/#collection">Collections</a></li>
     <li><a href="/#about">About</a></li>
     <li><a href="/#cta">Contact</a></li>
+    <li><a href="/orders">My Orders</a></li>
   </ul>
   
   <div style="display: flex; align-items: center; gap: 1rem; z-index: 1000;">
@@ -1621,7 +1622,18 @@ function updateCartUI() {
   const totalQty = document.getElementById('cart-total-qty');
   
   let totalItems = 0;
-  cart.forEach(item => totalItems += item.qty);
+  let estimatedTotal = 0;
+  
+  cart.forEach(item => {
+    totalItems += item.qty;
+    const productData = products.find(p => p.title === item.name);
+    if (productData) {
+      const priceMatch = productData.price.match(/\\d+/);
+      if (priceMatch) {
+        estimatedTotal += parseInt(priceMatch[0], 10) * item.qty;
+      }
+    }
+  });
   
   if (totalItems > 0) {
     badge.textContent = totalItems;
@@ -1636,13 +1648,16 @@ function updateCartUI() {
   
   list.innerHTML = '';
   cart.forEach(item => {
+    const productData = products.find(p => p.title === item.name);
+    const priceString = productData ? productData.price : 'Price on Enquiry';
+    
     const itemEl = document.createElement('div');
     itemEl.style.cssText = "display: flex; gap: 1rem; border-bottom: 1px solid rgba(232,220,202,0.5); padding-bottom: 1rem; align-items: center;";
     itemEl.innerHTML = `
       <img src="${item.img}" style="width: 60px; height: 80px; object-fit: cover; border-radius: 4px; border: 1px solid var(--parchment);" />
       <div style="flex: 1; display: flex; flex-direction: column; gap: 0.2rem;">
         <h5 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; color: var(--text-dark);">${item.name}</h5>
-        <span style="font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--gold); font-weight: 500;">Price on Enquiry</span>
+        <span style="font-family: 'Jost', sans-serif; font-size: 0.8rem; color: var(--gold); font-weight: 500;">${priceString}</span>
         <div style="display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem;">
           <button onclick="updateQty('${item.name}', -1)" style="width: 22px; height: 22px; border: 1px solid var(--parchment); background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem;">-</button>
           <span style="font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 600; min-width: 14px; text-align: center;">${item.qty}</span>
@@ -1657,6 +1672,11 @@ function updateCartUI() {
   if (totalQty) {
     totalQty.textContent = totalItems;
   }
+  
+  const estimatedTotalEl = document.getElementById('cart-estimated-total');
+  if (estimatedTotalEl) {
+    estimatedTotalEl.textContent = estimatedTotal > 0 ? '₹' + estimatedTotal.toLocaleString('en-IN') : 'Price on Enquiry';
+  }
 }
 
 function checkoutFromCart() {
@@ -1666,7 +1686,13 @@ function checkoutFromCart() {
   const checkoutData = cart.map(item => {
       const p = products.find(prod => prod.title === item.name);
       const img = p && p.images && p.images.length > 0 ? p.images[0] : '';
-      const priceStr = (typeof item.price === 'number') ? String(item.price) : item.price;
+      let priceStr = '5000';
+      if (p) {
+        const priceMatch = p.price.match(/\d+/);
+        if (priceMatch) {
+          priceStr = priceMatch[0];
+        }
+      }
       return {
           name: item.name,
           qty: item.qty,
@@ -1967,7 +1993,7 @@ function showToast(message) {
       </div>
       <div style="display: flex; justify-content: space-between; font-family: 'Jost', sans-serif; font-size: 0.9rem; font-weight: 500;">
         <span style="color: var(--text-mid);">Estimated Total</span>
-        <span style="color: var(--gold); font-weight: 600;">Price on Enquiry</span>
+        <span id="cart-estimated-total" style="color: var(--gold); font-weight: 600;">Price on Enquiry</span>
       </div>
       
       <button onclick="checkoutFromCart()" style="width: 100%; padding: 1.2rem; background: var(--text-dark); border: none; border-radius: 4px; color: #fff; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--warm-brown)';" onmouseout="this.style.background='var(--text-dark)';">
@@ -2236,6 +2262,12 @@ function showToast(message) {
       <p style="line-height: 1.6; font-size: 0.9rem;">
         For any replacement request, please contact Pavana Silks Customer Support within 3 days of receiving your order. Our team will assist you with the verification and replacement process.
       </p>
+      
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/return" style="display: inline-block; background: var(--primary-dark, #5C3A1E); color: white; text-decoration: none; padding: 0.8rem 1.5rem; font-weight: 500; font-family: 'Jost', sans-serif; border-radius: 4px; transition: background 0.3s ease;">
+          Click here to return / replace item
+        </a>
+      </div>
     </div>
   </div>
 

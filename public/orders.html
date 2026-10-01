@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - Pavana Silks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #5C3A1E;
+      --secondary-color: #B8912A;
+      --bg-color: #FAF6F0;
+      --text-main: #2C2A29;
+      --text-muted: #6B6865;
+      --border-color: #E8DCCA;
+      --card-bg: #FFFFFF;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Jost', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+    }
+
+    header {
+      width: 100%;
+      background: var(--card-bg);
+      padding: 1.5rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--primary-color);
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Order Card (Amazon Style) */
+    .order-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .order-header {
+      background: rgba(184, 145, 42, 0.05); /* very light gold */
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .header-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .header-value {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+    .order-id {
+      color: var(--primary-color);
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+
+    .order-body {
+      padding: 1.5rem;
+    }
+    .order-status {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2e7d32; /* Success green */
+      margin-bottom: 1.5rem;
+    }
+
+    .order-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .order-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .order-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .item-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    .item-details {
+      flex: 1;
+    }
+    .item-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .item-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .item-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      min-width: 150px;
+    }
+
+    .btn-return {
+      background: white;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-return:hover {
+      border-color: var(--primary-color);
+      background: rgba(92, 58, 30, 0.05);
+      color: var(--primary-color);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 5rem 1rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+    .empty-state h2 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .empty-state a {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .empty-state a:hover {
+      background: var(--secondary-color);
+    }
+
+    @media (max-width: 600px) {
+      .order-item {
+        flex-direction: column;
+      }
+      .item-actions {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/new-arrivals" class="logo">
+      <img src="/pavana-logo.png" alt="Pavana Silks Logo" style="width: 80px; height: 80px; object-fit: contain; filter: brightness(1.1) contrast(1.1);" />
+      Pavana Silks
+    </a>
+  </header>
+
+  <div class="container">
+    <h1>Your Orders</h1>
+    <div id="orders-container">
+      <!-- Orders will be generated here by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    function loadOrders() {
+      const container = document.getElementById('orders-container');
+      let myOrders = [];
+      
+      try {
+        const stored = localStorage.getItem('myOrders');
+        if (stored) myOrders = JSON.parse(stored);
+      } catch(e) {
+        console.error("Error loading orders", e);
+      }
+
+      if (myOrders.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h2>No orders found</h2>
+            <p style="color: var(--text-muted)">Looks like you haven't placed any orders yet.</p>
+            <a href="/new-arrivals">Continue Shopping</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Sort newest first
+      myOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      let html = '';
+      myOrders.forEach(order => {
+        // Format date
+        const d = new Date(order.date);
+        const dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+        
+        let itemsHtml = '';
+        if (order.items && order.items.length > 0) {
+          order.items.forEach(item => {
+            const qty = item.qty || 1;
+            // Generate return link pre-filled with data
+            const returnUrl = `/return?paymentId=${encodeURIComponent(order.paymentId)}&customerName=${encodeURIComponent(order.customerName)}`;
+            
+            itemsHtml += `
+              <div class="order-item">
+                <img src="${item.image || '/pavana-logo.png'}" alt="${item.name}" class="item-img" onerror="this.src='/pavana-logo.png'">
+                <div class="item-details">
+                  <div class="item-name">${item.name}</div>
+                  <div class="item-meta">Quantity: ${qty}</div>
+                </div>
+                <div class="item-actions">
+                  <a href="${returnUrl}" class="btn-return">Return or Replace item</a>
+                </div>
+              </div>
+            `;
+          });
+        }
+
+        html += `
+          <div class="order-card">
+            <div class="order-header">
+              <div style="display: flex; gap: 3rem; flex-wrap: wrap;">
+                <div class="header-block">
+                  <span class="header-label">Order Placed</span>
+                  <span class="header-value">${dateStr}</span>
+                </div>
+                <div class="header-block">
+                  <span class="header-label">Total</span>
+                  <span class="header-value">₹${order.total.toLocaleString('en-IN')}.00</span>
+                </div>
+                <div class="header-block">
+                  <span class="header-label">Ship To</span>
+                  <span class="header-value">${order.customerName}</span>
+                </div>
+              </div>
+              <div class="header-block" style="align-items: flex-end;">
+                <span class="header-label">Order ID</span>
+                <span class="header-value order-id">#${order.paymentId}</span>
+              </div>
+            </div>
+            <div class="order-body">
+              <div class="order-status">Confirmed</div>
+              <div class="order-items">
+                ${itemsHtml}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    loadOrders();
+  </script>
+</body>
+</html>

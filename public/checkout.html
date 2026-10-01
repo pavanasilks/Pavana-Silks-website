@@ -743,6 +743,23 @@
                     const verifyData = await verifyRes.json();
                     if(verifyData.success) {
                         
+                        // Save Order to Local Storage for "My Orders" page
+                        let myOrders = [];
+                        try {
+                            const existing = localStorage.getItem('myOrders');
+                            if (existing) myOrders = JSON.parse(existing);
+                        } catch(e) {}
+                        
+                        myOrders.push({
+                            paymentId: response.razorpay_payment_id,
+                            date: new Date().toISOString(),
+                            items: checkoutData,
+                            total: totalPrice,
+                            customerName: fullName,
+                            status: 'Order Placed'
+                        });
+                        localStorage.setItem('myOrders', JSON.stringify(myOrders));
+                        
                         // WhatsApp notification trigger
                         const msg = `*✅ PAID ORDER! (Razorpay)* 🛍️\n` +
                                     `-----------------------------------\n` +
