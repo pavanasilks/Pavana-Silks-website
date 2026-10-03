@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout — Pavana Silks</title>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
   <style>
     :root {
       --primary: #5C3A1E; /* Warm brown from website theme */
@@ -128,6 +130,11 @@
     .floating-input:focus {
       border-color: var(--focus-color);
       box-shadow: 0 0 0 1px var(--focus-color);
+    }
+    
+    .iti {
+      width: 100%;
+      display: block;
     }
     
     .floating-label {
@@ -500,7 +507,7 @@
               <label class="floating-label">City</label>
             </div>
             <div class="form-group">
-              <select id="state" class="floating-select">
+              <select id="state" class="floating-select" onchange="document.getElementById('other-state-group').style.display = this.value === 'Other' ? 'block' : 'none'">
                 <option value="Tamil Nadu">Tamil Nadu</option>
                 <option value="Karnataka">Karnataka</option>
                 <option value="Kerala">Kerala</option>
@@ -513,14 +520,19 @@
               <label class="select-label">State</label>
               <svg class="select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </div>
-            <div class="form-group">
-              <input type="text" id="pincode" class="floating-input" required placeholder=" " />
+            <div class="form-group" style="position: relative;">
+              <input type="text" id="pincode" class="floating-input" required placeholder=" " maxlength="6" pattern="[0-9]{6}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); window.checkPinCode(this.value);" />
               <label class="floating-label">PIN code</label>
+              <div id="pincode-error" style="color: var(--error-color); font-size: 0.75rem; position: absolute; bottom: -18px; left: 0; display: none;">Invalid PIN code</div>
             </div>
           </div>
-          <div class="form-group">
-            <input type="tel" id="phone" class="floating-input" required placeholder=" " />
-            <label class="floating-label">Phone</label>
+          <div class="form-group" id="other-state-group" style="display: none;">
+            <input type="text" id="other-state" class="floating-input" placeholder=" " />
+            <label class="floating-label">Enter your State</label>
+          </div>
+          <div class="form-group" id="phone-group">
+            <input type="tel" id="phone" class="floating-input" required placeholder=" " maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+            <label class="floating-label" id="phone-label" style="left: 50px; z-index: 2;">Phone</label>
           </div>
           <label class="checkbox-group" style="margin-bottom: 2.5rem;">
             <input type="checkbox" id="save-info" />
@@ -596,6 +608,66 @@
   </div>
 
   <script>
+    // Initialize intl-tel-input
+    const phoneInputField = document.querySelector("#phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+      initialCountry: "in",
+      preferredCountries: ["in", "us", "gb", "ca", "ae"],
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+    });
+    
+    // Fix floating label for intl-tel-input
+    const itiContainer = document.querySelector('.iti');
+    const phoneLabel = document.getElementById('phone-label');
+    if (itiContainer && phoneLabel) {
+      itiContainer.appendChild(phoneLabel);
+    }
+
+    // PIN Code API Validation
+    window.checkPinCode = async function(val) {
+      const errorEl = document.getElementById('pincode-error');
+      if (val.length === 6) {
+        try {
+          const res = await fetch(`https://api.postalpincode.in/pincode/${val}`);
+          const data = await res.json();
+          if (data && data[0] && data[0].Status === "Success") {
+            errorEl.style.display = 'none';
+            const postOffice = data[0].PostOffice[0];
+            const cityEl = document.getElementById('city');
+            cityEl.value = postOffice.District;
+            // focus to trigger floating label
+            cityEl.focus(); 
+            document.getElementById('pincode').focus();
+            
+            const stateVal = postOffice.State;
+            const stateSelect = document.getElementById('state');
+            let found = false;
+            for (let i = 0; i < stateSelect.options.length; i++) {
+              if (stateSelect.options[i].value.toLowerCase() === stateVal.toLowerCase()) {
+                stateSelect.selectedIndex = i;
+                found = true;
+                break;
+              }
+            }
+            if (!found) {
+              stateSelect.value = "Other";
+              document.getElementById('other-state-group').style.display = 'block';
+              document.getElementById('other-state').value = stateVal;
+            } else {
+              document.getElementById('other-state-group').style.display = 'none';
+            }
+          } else {
+            errorEl.style.display = 'block';
+            errorEl.textContent = 'Invalid PIN code';
+          }
+        } catch(e) {
+          console.log(e);
+        }
+      } else {
+        errorEl.style.display = 'none';
+      }
+    };
+
     let checkoutData = [];
     let totalPrice = 0;
     let productNamesForNotes = "";
@@ -679,9 +751,14 @@
       const address = document.getElementById('address').value;
       const apartment = document.getElementById('apartment').value;
       const city = document.getElementById('city').value;
-      const state = document.getElementById('state').value;
+      let state = document.getElementById('state').value;
+      if (state === 'Other') {
+        state = document.getElementById('other-state').value || 'Other';
+      }
       const pincode = document.getElementById('pincode').value;
-      const phone = document.getElementById('phone').value;
+      
+      // Get full international phone number
+      const phone = phoneInput.getNumber();
 
       const fullName = fname + " " + lname;
       const fullAddress = address + (apartment ? ", " + apartment : "");
@@ -728,6 +805,7 @@
             "currency": orderData.currency,
             "name": "Pavana Silks",
             "description": "Secure Checkout",
+            "image": window.location.origin + "/pavana-logo.png",
             "order_id": orderData.id,
             "handler": async function (response){
                 // 4. Verify Payment
