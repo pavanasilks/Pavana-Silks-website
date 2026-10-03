@@ -671,6 +671,7 @@
     let checkoutData = [];
     let totalPrice = 0;
     let productNamesForNotes = "";
+    let productImagesForNotes = "";
 
     function parsePriceSafely(priceVal) {
       if (!priceVal) return 5000;
@@ -723,6 +724,7 @@
       });
 
       productNamesForNotes = checkoutData.map(i => i.name).join(', ');
+      productImagesForNotes = checkoutData.map(i => i.image).filter(Boolean).join('\n');
 
       const formattedTotal = '₹' + totalPrice.toLocaleString('en-IN') + '.00';
       document.getElementById('subtotal-val').textContent = formattedTotal;
@@ -843,6 +845,7 @@
                         const msg = `*✅ PAID ORDER! (Razorpay)* 🛍️\n` +
                                     `-----------------------------------\n` +
                                     `*Products:* ${productNamesForNotes}\n` +
+                                    `*Product Images:*\n${productImagesForNotes}\n\n` +
                                     `*Amount Paid:* Rs. ${totalPrice}\n` +
                                     `*Payment ID:* ${response.razorpay_payment_id}\n\n` +
                                     `*Customer Details:*\n` +
