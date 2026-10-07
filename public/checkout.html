@@ -666,12 +666,73 @@
       } else {
         errorEl.style.display = 'none';
       }
+      // Re-trigger shipping calculation after PIN autofill
+      setTimeout(calculateShipping, 100);
     };
 
     let checkoutData = [];
     let totalPrice = 0;
+    let shippingPrice = 0;
     let productNamesForNotes = "";
     let productImagesForNotes = "";
+
+    function calculateShipping() {
+      const city = (document.getElementById('city').value || '').toLowerCase().trim();
+      let state = (document.getElementById('state').value || '').toLowerCase().trim();
+      if (state === 'other') {
+        state = (document.getElementById('other-state').value || '').toLowerCase().trim();
+      }
+
+      // Empty case
+      if (!city && !state && document.getElementById('state').value === "") {
+        shippingPrice = 0;
+        document.getElementById('shipping-val').textContent = "Enter shipping address";
+        updateFinalTotal();
+        return;
+      }
+
+      let totalQty = checkoutData.reduce((sum, item) => sum + (parseInt(item.qty) || 1), 0);
+      if (totalQty === 0) return;
+      let billableKg = Math.ceil((totalQty * 700) / 1000);
+
+      let baseRate = 250;
+      let maxShipping = 350;
+
+      if (city === 'chennai') {
+        baseRate = 50;
+        maxShipping = 150;
+      } else if (state.includes('tamil nadu') || state.includes('tamilnadu')) {
+        baseRate = 100;
+        maxShipping = 350; 
+      } else if (city === 'bangalore' || city === 'bengaluru' || city === 'hyderabad') {
+        baseRate = 150;
+        maxShipping = 250;
+      } else if (city === 'delhi' || city === 'mumbai' || city === 'kolkata') {
+        baseRate = 200;
+        maxShipping = 350;
+      } else {
+        baseRate = 250;
+        maxShipping = 350;
+      }
+
+      let calc = baseRate * billableKg;
+      shippingPrice = Math.min(calc, maxShipping);
+
+      document.getElementById('shipping-val').textContent = '₹' + shippingPrice.toLocaleString('en-IN') + '.00';
+      updateFinalTotal();
+    }
+
+    function updateFinalTotal() {
+      const finalAmt = totalPrice + shippingPrice;
+      const formattedFinal = '₹' + finalAmt.toLocaleString('en-IN') + '.00';
+      document.getElementById('total-val').textContent = formattedFinal;
+      document.getElementById('mobile-total-val').textContent = formattedFinal;
+    }
+
+    document.getElementById('city').addEventListener('input', calculateShipping);
+    document.getElementById('state').addEventListener('change', calculateShipping);
+    document.getElementById('other-state').addEventListener('input', calculateShipping);
+
 
     function parsePriceSafely(priceVal) {
       if (!priceVal) return 5000;
@@ -728,8 +789,8 @@
 
       const formattedTotal = '₹' + totalPrice.toLocaleString('en-IN') + '.00';
       document.getElementById('subtotal-val').textContent = formattedTotal;
-      document.getElementById('total-val').textContent = formattedTotal;
-      document.getElementById('mobile-total-val').textContent = formattedTotal;
+      
+      calculateShipping(); // Will update total-val and mobile-total-val
     }
 
     loadCheckoutData();
@@ -778,7 +839,7 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-                amount: totalPrice, 
+                amount: totalPrice + shippingPrice, 
                 receipt: "rcpt_" + Date.now(),
                 notes: {
                     Product: productNamesForNotes,
@@ -835,7 +896,7 @@
                             paymentId: response.razorpay_payment_id,
                             date: new Date().toISOString(),
                             items: checkoutData,
-                            total: totalPrice,
+                            total: totalPrice + shippingPrice,
                             customerName: fullName,
                             status: 'Order Placed'
                         });
@@ -846,7 +907,7 @@
                                     `-----------------------------------\n` +
                                     `*Products:* ${productNamesForNotes}\n` +
                                     `*Product Images:*\n${productImagesForNotes}\n\n` +
-                                    `*Amount Paid:* Rs. ${totalPrice}\n` +
+                                    `*Amount Paid:* Rs. ${totalPrice + shippingPrice} (includes Rs. ${shippingPrice} shipping)\n` +
                                     `*Payment ID:* ${response.razorpay_payment_id}\n\n` +
                                     `*Customer Details:*\n` +
                                     `• *Name:* ${fullName}\n` +
