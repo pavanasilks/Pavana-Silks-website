@@ -62,7 +62,14 @@ body {
   display: block;
   object-fit: contain;
   transform: translateY(2px);
-  filter: brightness(1.1) contrast(1.1);
+  background: rgba(250, 246, 240, 0.95);
+  border-radius: 8px;
+  padding: 5px;
+  filter: none;
+}
+#navbar.scrolled .nav-logo { 
+  background: transparent; 
+  padding: 0;
 }
 .nav-links { display: flex; gap: 2.4rem; list-style: none; }
 .nav-links a {
@@ -1645,7 +1652,7 @@ function updateCartUI() {
     totalItems += item.qty;
     const productData = products.find(p => p.title === item.name);
     if (productData) {
-      const priceMatch = productData.price.match(/\\d+/);
+      const priceMatch = productData.price.match(/\d+/);
       if (priceMatch) {
         estimatedTotal += parseInt(priceMatch[0], 10) * item.qty;
       }
