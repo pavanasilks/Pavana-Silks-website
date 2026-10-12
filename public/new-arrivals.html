@@ -198,6 +198,43 @@ body {
   padding: 0.4rem 0.8rem;
   border-radius: 2px;
   box-shadow: 0 4px 10px rgba(184, 145, 42, 0.2);
+  z-index: 3;
+}
+.catalog-badge.badge-sold-out {
+  background: #8B2635;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(139, 38, 53, 0.35);
+}
+.catalog-card.is-sold-out .catalog-img {
+  filter: grayscale(15%);
+}
+.sold-out-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 26, 14, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+.sold-out-overlay span {
+  background: rgba(139, 38, 53, 0.95);
+  color: #fff;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 0.45rem 1.1rem;
+  border-radius: 2px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.price-sold-out {
+  color: #8B2635;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-style: normal;
+  margin-left: 0.4rem;
 }
 .catalog-info {
   padding: 1.5rem;
@@ -842,23 +879,6 @@ footer {
 // Catalog products
 const products = [
   {
-    id: "demo-sale-saree-01",
-    badge: "New Arrival",
-    title: "Demo Sale Silk Cotton Saree",
-    price: "100/- + SHIPPING",
-    desc: "A beautiful silk cotton saree for demonstration purposes.",
-    images: [
-      "https://res.cloudinary.com/rixydqqx/image/upload/v1785320938/WhatsApp_Image_2026-07-29_at_3.57.34_PM_1_uegzr2.jpg"
-    ],
-    whatsappText: "Hi Pavana Silks, I am interested in inquiring about the Demo Sale Silk Cotton Saree.",
-    specs: {
-      "Material": "Silk Cotton",
-      "Zari Type": "Genuine Zari Brocade",
-      "Weave Craft": "Traditional Handloom",
-      "Care": "Dry clean only"
-    }
-  },
-  {
     id: "premium-silk-saree-01",
     badge: "New Arrival",
     title: "Premium Handwoven Silk Cotton Saree",
@@ -880,7 +900,8 @@ const products = [
   },
   {
     id: "classic-silk-saree-02",
-    badge: "New Arrival",
+    badge: "Sold Out",
+    soldOut: true,
     title: "Classic Handwoven Silk Cotton Saree",
     price: "4700/- + SHIPPING",
     desc: "Navy Blue with Red Silk Cotton Handloom saree with Rich Ramayana Border and Rich Pallu with Butta!!!",
@@ -901,7 +922,8 @@ const products = [
   },
   {
     id: "elegant-silk-saree-03",
-    badge: "New Arrival",
+    badge: "Sold Out",
+    soldOut: true,
     title: "Elegant Handwoven Silk Cotton Saree",
     price: "4700/- + SHIPPING",
     desc: "Dark Lavender with Blue Pure Silk Cotton Handloom saree with Rich Ramayana Border and Rich Pallu with Butta!!!",
@@ -1061,7 +1083,8 @@ const products = [
   },
   {
     id: "elegant-silk-saree-11",
-    badge: "New Arrival",
+    badge: "Sold Out",
+    soldOut: true,
     title: "Elegant Handwoven Silk Cotton Saree",
     price: "5900/- + SHIPPING",
     desc: "Yellow with Lavender Pure Silk Cotton Handloom saree with Rich Border and Rich Pallu with Zari Line Checks!!!",
@@ -1101,7 +1124,8 @@ const products = [
   },
   {
     id: "regal-silk-saree-13",
-    badge: "New Arrival",
+    badge: "Sold Out",
+    soldOut: true,
     title: "Regal Handwoven Silk Cotton Saree",
     price: "4900/- + SHIPPING",
     desc: "Coffee Brown with Orange Pure Silk Cotton Handloom saree with Rich Border and Rich Pallu with Zari Line Checks!!!",
@@ -1221,7 +1245,8 @@ const products = [
   },
   {
     id: "captivating-silk-saree-19",
-    badge: "New Arrival",
+    badge: "Sold Out",
+    soldOut: true,
     title: "Pure Silk Cotton Handloom saree with Rich Korvai Border",
     price: "₹5,900",
     desc: "Pure Silk Cotton Handloom saree with Rich Korvai Border and Rich Pallu with Kassa Kassa Checks!!!",
@@ -1241,7 +1266,8 @@ const products = [
   },
   {
     id: "magnificent-silk-saree-20",
-    badge: "New Arrival",
+    badge: "Sold Out",
+    soldOut: true,
     title: "Purple with Pink Pure Silk Cotton Handloom saree",
     price: "₹6,600",
     desc: "Purple with Pink Pure Silk Cotton Handloom saree with Rich Korvai Long Satin Border and Rich Pallu with Zari Line Checks and Butta!!!",
@@ -1386,23 +1412,23 @@ const breadcrumbTitle = document.getElementById('breadcrumbTitle');
 // Build Catalog Grid dynamically
 function initCatalog() {
   catalogGrid.innerHTML = '';
-  // Only display products with "New Arrival" badge
-  const newArrivals = products.filter(p => p.badge === "New Arrival");
-  newArrivals.forEach(p => {
+  products.forEach(p => {
+    const isSoldOut = p.soldOut || p.badge === "Sold Out";
     const card = document.createElement('div');
-    card.className = 'catalog-card';
+    card.className = `catalog-card ${isSoldOut ? 'is-sold-out' : ''}`;
     card.onclick = () => {
       window.location.hash = p.id;
     };
     
     card.innerHTML = `
       <div class="catalog-img-wrap">
-        <span class="catalog-badge">${p.badge}</span>
+        <span class="catalog-badge ${isSoldOut ? 'badge-sold-out' : ''}">${p.badge}</span>
         <img class="catalog-img" src="${p.images[0]}" alt="${p.title}" />
+        ${isSoldOut ? '<div class="sold-out-overlay"><span>SOLD OUT</span></div>' : ''}
       </div>
       <div class="catalog-info">
         <h3 class="catalog-title">${p.title}</h3>
-        <p class="catalog-price">${p.price}</p>
+        <p class="catalog-price">${p.price} ${isSoldOut ? '<span class="price-sold-out">(Sold Out)</span>' : ''}</p>
         <span class="catalog-action">
           View details
           <svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1449,12 +1475,45 @@ function showProduct(id, isManual = false) {
   // Populate info
   detailTitle.textContent = p.title;
   breadcrumbTitle.textContent = p.title;
-  detailPrice.textContent = p.price;
   detailDesc.textContent = p.desc;
   
-  whatsappLink.href = `https://wa.me/918667570740?text=${encodeURIComponent(p.whatsappText)}`;
-  document.getElementById('addToCartBtn').onclick = () => addToCart(p.title, p.images[0]);
-  document.getElementById('buyNowBtn').onclick = () => buyNow(p.title, p.price);
+  const isSoldOut = p.soldOut || p.badge === "Sold Out";
+  const addToCartBtn = document.getElementById('addToCartBtn');
+  const buyNowBtn = document.getElementById('buyNowBtn');
+  
+  if (isSoldOut) {
+    detailPrice.innerHTML = `${p.price} <span style="display: inline-block; margin-left: 0.8rem; padding: 0.25rem 0.7rem; background: #8B2635; color: #fff; font-size: 0.72rem; font-family: 'Jost', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px; vertical-align: middle;">Sold Out</span>`;
+    
+    addToCartBtn.disabled = true;
+    addToCartBtn.textContent = 'Sold Out';
+    addToCartBtn.style.opacity = '0.55';
+    addToCartBtn.style.cursor = 'not-allowed';
+    addToCartBtn.onclick = () => showToast(p.title + " is currently sold out!");
+    
+    buyNowBtn.disabled = true;
+    buyNowBtn.textContent = 'Sold Out';
+    buyNowBtn.style.opacity = '0.55';
+    buyNowBtn.style.cursor = 'not-allowed';
+    buyNowBtn.onclick = () => showToast(p.title + " is currently sold out!");
+    
+    whatsappLink.href = `https://wa.me/918667570740?text=${encodeURIComponent('Hi Pavana Silks, I am interested in inquiring about ' + p.title + ' (marked Sold Out).')}`;
+  } else {
+    detailPrice.textContent = p.price;
+    
+    addToCartBtn.disabled = false;
+    addToCartBtn.textContent = 'Add to Cart';
+    addToCartBtn.style.opacity = '1';
+    addToCartBtn.style.cursor = 'pointer';
+    addToCartBtn.onclick = () => addToCart(p.title, p.images[0]);
+    
+    buyNowBtn.disabled = false;
+    buyNowBtn.textContent = 'Buy Now';
+    buyNowBtn.style.opacity = '1';
+    buyNowBtn.style.cursor = 'pointer';
+    buyNowBtn.onclick = () => buyNow(p.title, p.price);
+    
+    whatsappLink.href = `https://wa.me/918667570740?text=${encodeURIComponent(p.whatsappText)}`;
+  }
   
   // Populate Specs
   specTable.innerHTML = '';
@@ -1603,6 +1662,11 @@ function toggleCart() {
 }
 
 function addToCart(productName, productImg = "/saree images/kancheepuram-gold.jpg") {
+  const p = products.find(prod => prod.title === productName);
+  if (p && (p.soldOut || p.badge === "Sold Out")) {
+    showToast(productName + " is currently sold out!");
+    return;
+  }
   const existing = cart.find(item => item.name === productName);
   if (existing) {
     existing.qty += 1;
@@ -1731,6 +1795,10 @@ function checkoutFromCart() {
 
 function buyNow(productName, productPrice = '0') {
   const p = products.find(prod => prod.title === productName);
+  if (p && (p.soldOut || p.badge === "Sold Out")) {
+    showToast(productName + " is currently sold out!");
+    return;
+  }
   const img = p && p.images && p.images.length > 0 ? p.images[0] : '';
   const checkoutData = [{
     name: productName,

@@ -609,6 +609,42 @@ section { padding: 6rem 3rem; }
   color: rgba(255,255,255,0.7);
   font-style: italic;
 }
+.home-sold-out-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #8B2635;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  border-radius: 2px;
+  z-index: 6;
+  box-shadow: 0 4px 10px rgba(139, 38, 53, 0.35);
+}
+.home-price-sold-out {
+  color: #ffb3ba;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-style: normal;
+  margin-left: 0.4rem;
+}
+.saree-card.is-sold-out .saree-img,
+.saree-slide.is-sold-out img {
+  filter: grayscale(15%);
+}
+.btn-add-cart.btn-sold-out {
+  background: #4A3020 !important;
+  color: #E8DCCA !important;
+  opacity: 0.9;
+  border: 1px solid #4A3020 !important;
+  cursor: pointer;
+}
+.btn-add-cart.btn-sold-out:hover {
+  background: #362215 !important;
+}
 .saree-badge {
   position: absolute;
   top: 1rem; left: 1rem;
@@ -1312,20 +1348,22 @@ footer::before {
           <p>5500/- + SHIPPING</p>
         </div>
       </div>
-      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#classic-silk-saree-02'">
+      <div class="saree-card reveal-up is-sold-out" onclick="window.location.href='/new-arrivals#classic-silk-saree-02'">
+        <span class="home-sold-out-badge">Sold Out</span>
         <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790153018/9ac426d5-f27b-4dc5-85df-ce0476bcb3ee_bfrwsm.png" alt="Classic Handwoven Silk Cotton Saree" class="saree-img" />
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Classic Handwoven Silk Cotton Saree</h4>
-          <p>4700/- + SHIPPING</p>
+          <p>4700/- + SHIPPING <span class="home-price-sold-out">(Sold Out)</span></p>
         </div>
       </div>
-      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#elegant-silk-saree-03'">
+      <div class="saree-card reveal-up is-sold-out" onclick="window.location.href='/new-arrivals#elegant-silk-saree-03'">
+        <span class="home-sold-out-badge">Sold Out</span>
         <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790154466/24f7adc8-f844-4550-9fd9-3841d4a15903_yifxcf.png" alt="Elegant Handwoven Silk Cotton Saree" class="saree-img" />
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Elegant Handwoven Silk Cotton Saree</h4>
-          <p>4700/- + SHIPPING</p>
+          <p>4700/- + SHIPPING <span class="home-price-sold-out">(Sold Out)</span></p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#exquisite-silk-saree-04'">
@@ -1384,12 +1422,13 @@ footer::before {
           <p>6600/- + SHIPPING</p>
         </div>
       </div>
-      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#elegant-silk-saree-11'">
+      <div class="saree-card reveal-up is-sold-out" onclick="window.location.href='/new-arrivals#elegant-silk-saree-11'">
+        <span class="home-sold-out-badge">Sold Out</span>
         <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571704/WhatsApp_Image_2026-09-28_at_10.28.57_AM_x1h2kd.jpg" alt="Elegant Handwoven Silk Cotton Saree" class="saree-img" />
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Elegant Handwoven Silk Cotton Saree</h4>
-          <p>5900/- + SHIPPING</p>
+          <p>5900/- + SHIPPING <span class="home-price-sold-out">(Sold Out)</span></p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#classic-silk-saree-12'">
@@ -1400,12 +1439,13 @@ footer::before {
           <p>6200/- + SHIPPING</p>
         </div>
       </div>
-      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#regal-silk-saree-13'">
+      <div class="saree-card reveal-up is-sold-out" onclick="window.location.href='/new-arrivals#regal-silk-saree-13'">
+        <span class="home-sold-out-badge">Sold Out</span>
         <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572395/WhatsApp_Image_2026-09-28_at_10.37.00_AM_fbzygx.jpg" alt="Regal Handwoven Silk Cotton Saree" class="saree-img" />
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Regal Handwoven Silk Cotton Saree</h4>
-          <p>4900/- + SHIPPING</p>
+          <p>4900/- + SHIPPING <span class="home-price-sold-out">(Sold Out)</span></p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#alluring-silk-saree-14'">
@@ -1448,20 +1488,22 @@ footer::before {
           <p>₹4,900</p>
         </div>
       </div>
-      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#captivating-silk-saree-19'">
+      <div class="saree-card reveal-up is-sold-out" onclick="window.location.href='/new-arrivals#captivating-silk-saree-19'">
+        <span class="home-sold-out-badge">Sold Out</span>
         <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790684930/WhatsApp_Image_2026-09-29_at_5.15.48_PM_oucxyr.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" class="saree-img" />
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Pure Silk Cotton Handloom saree with Rich Korvai Border</h4>
-          <p>₹5,900</p>
+          <p>₹5,900 <span class="home-price-sold-out">(Sold Out)</span></p>
         </div>
       </div>
-      <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#magnificent-silk-saree-20'">
+      <div class="saree-card reveal-up is-sold-out" onclick="window.location.href='/new-arrivals#magnificent-silk-saree-20'">
+        <span class="home-sold-out-badge">Sold Out</span>
         <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790685634/ChatGPT_Image_Sep_29_2026_06_10_16_PM_ljory1.png" alt="Purple with Pink Pure Silk Cotton Handloom saree" class="saree-img" />
         <div class="saree-card-overlay"></div>
         <div class="saree-card-info">
           <h4>Purple with Pink Pure Silk Cotton Handloom saree</h4>
-          <p>₹6,600</p>
+          <p>₹6,600 <span class="home-price-sold-out">(Sold Out)</span></p>
         </div>
       </div>
       <div class="saree-card reveal-up" onclick="window.location.href='/new-arrivals#premium-silk-saree-21'">
@@ -1621,22 +1663,24 @@ footer::before {
           <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#premium-silk-saree-01'">View Details</button>
         </div>
       </div>
-      <div class="saree-slide">
+      <div class="saree-slide is-sold-out">
         <div class="saree-slide-img-wrap">
+          <span class="home-sold-out-badge">Sold Out</span>
           <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790153018/9ac426d5-f27b-4dc5-85df-ce0476bcb3ee_bfrwsm.png" alt="Classic Handwoven Silk Cotton Saree" />
         </div>
         <div class="saree-slide-content">
           <h3 class="saree-slide-title">Classic Handwoven Silk Cotton Saree</h3>
-          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#classic-silk-saree-02'">View Details</button>
+          <button class="btn-add-cart btn-sold-out" onclick="window.location.href='/new-arrivals#classic-silk-saree-02'">Sold Out</button>
         </div>
       </div>
-      <div class="saree-slide">
+      <div class="saree-slide is-sold-out">
         <div class="saree-slide-img-wrap">
+          <span class="home-sold-out-badge">Sold Out</span>
           <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790154466/24f7adc8-f844-4550-9fd9-3841d4a15903_yifxcf.png" alt="Elegant Handwoven Silk Cotton Saree" />
         </div>
         <div class="saree-slide-content">
           <h3 class="saree-slide-title">Elegant Handwoven Silk Cotton Saree</h3>
-          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#elegant-silk-saree-03'">View Details</button>
+          <button class="btn-add-cart btn-sold-out" onclick="window.location.href='/new-arrivals#elegant-silk-saree-03'">Sold Out</button>
         </div>
       </div>
       <div class="saree-slide">
@@ -1702,13 +1746,14 @@ footer::before {
           <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#gorgeous-silk-saree-10'">View Details</button>
         </div>
       </div>
-      <div class="saree-slide">
+      <div class="saree-slide is-sold-out">
         <div class="saree-slide-img-wrap">
+          <span class="home-sold-out-badge">Sold Out</span>
           <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790571704/WhatsApp_Image_2026-09-28_at_10.28.57_AM_x1h2kd.jpg" alt="Elegant Handwoven Silk Cotton Saree" />
         </div>
         <div class="saree-slide-content">
           <h3 class="saree-slide-title">Elegant Handwoven Silk Cotton Saree</h3>
-          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#elegant-silk-saree-11'">View Details</button>
+          <button class="btn-add-cart btn-sold-out" onclick="window.location.href='/new-arrivals#elegant-silk-saree-11'">Sold Out</button>
         </div>
       </div>
       <div class="saree-slide">
@@ -1720,13 +1765,14 @@ footer::before {
           <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#classic-silk-saree-12'">View Details</button>
         </div>
       </div>
-      <div class="saree-slide">
+      <div class="saree-slide is-sold-out">
         <div class="saree-slide-img-wrap">
+          <span class="home-sold-out-badge">Sold Out</span>
           <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790572395/WhatsApp_Image_2026-09-28_at_10.37.00_AM_fbzygx.jpg" alt="Regal Handwoven Silk Cotton Saree" />
         </div>
         <div class="saree-slide-content">
           <h3 class="saree-slide-title">Regal Handwoven Silk Cotton Saree</h3>
-          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#regal-silk-saree-13'">View Details</button>
+          <button class="btn-add-cart btn-sold-out" onclick="window.location.href='/new-arrivals#regal-silk-saree-13'">Sold Out</button>
         </div>
       </div>
       <div class="saree-slide">
@@ -1774,22 +1820,24 @@ footer::before {
           <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#stunning-silk-saree-18'">View Details</button>
         </div>
       </div>
-      <div class="saree-slide">
+      <div class="saree-slide is-sold-out">
         <div class="saree-slide-img-wrap">
+          <span class="home-sold-out-badge">Sold Out</span>
           <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790684930/WhatsApp_Image_2026-09-29_at_5.15.48_PM_oucxyr.jpg" alt="Pure Silk Cotton Handloom saree with Rich Korvai Border" />
         </div>
         <div class="saree-slide-content">
           <h3 class="saree-slide-title">Pure Silk Cotton Handloom saree with Rich Korvai Border</h3>
-          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#captivating-silk-saree-19'">View Details</button>
+          <button class="btn-add-cart btn-sold-out" onclick="window.location.href='/new-arrivals#captivating-silk-saree-19'">Sold Out</button>
         </div>
       </div>
-      <div class="saree-slide">
+      <div class="saree-slide is-sold-out">
         <div class="saree-slide-img-wrap">
+          <span class="home-sold-out-badge">Sold Out</span>
           <img src="https://res.cloudinary.com/rixydqqx/image/upload/v1790685634/ChatGPT_Image_Sep_29_2026_06_10_16_PM_ljory1.png" alt="Purple with Pink Pure Silk Cotton Handloom saree" />
         </div>
         <div class="saree-slide-content">
           <h3 class="saree-slide-title">Purple with Pink Pure Silk Cotton Handloom saree</h3>
-          <button class="btn-add-cart" onclick="window.location.href='/new-arrivals#magnificent-silk-saree-20'">View Details</button>
+          <button class="btn-add-cart btn-sold-out" onclick="window.location.href='/new-arrivals#magnificent-silk-saree-20'">Sold Out</button>
         </div>
       </div>
       <div class="saree-slide">
