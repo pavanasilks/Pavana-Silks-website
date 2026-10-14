@@ -542,7 +542,7 @@
           </label>
           
           <div id="static-shipping-message" style="margin-bottom: 1rem; font-weight: 500; font-size: 0.95rem;">
-             * Standard Shipping charge: <span style="color: var(--gold);">₹100</span> *
+             * Shipping: TN Max ₹150 | Bangalore &amp; Hyderabad Max ₹250 | Other States Max ₹350 *
           </div>
           <div id="mobile-summary-anchor" style="margin-bottom: 2.5rem;"></div>
 
@@ -690,9 +690,14 @@
         state = (document.getElementById('other-state').value || '').toLowerCase().trim();
       }
 
+      const staticMsg = document.getElementById('static-shipping-message');
+
       if (!city && !state && document.getElementById('state').value === "") {
         shippingPrice = 0;
         document.getElementById('shipping-val').textContent = "Enter shipping address";
+        if (staticMsg) {
+          staticMsg.innerHTML = '* Shipping: TN Max ₹150 | Bangalore &amp; Hyderabad Max ₹250 | Other States Max ₹350 *';
+        }
         updateFinalTotal();
         return;
       }
@@ -704,16 +709,20 @@
       let baseRate = 250;
       let maxShipping = 350;
 
-      if (city === 'chennai') {
+      const isChennai = city.includes('chennai');
+      const isTamilNadu = state.includes('tamil nadu') || state.includes('tamilnadu') || state.includes('tamil');
+      const isBlrOrHyd = city.includes('bangalore') || city.includes('bengaluru') || city.includes('hyderabad') || city.includes('secunderabad');
+
+      if (isChennai) {
         baseRate = 50;
         maxShipping = 150;
-      } else if (state.includes('tamil nadu') || state.includes('tamilnadu')) {
+      } else if (isTamilNadu) {
         baseRate = 100;
-        maxShipping = 350; 
-      } else if (city === 'bangalore' || city === 'bengaluru' || city === 'hyderabad') {
+        maxShipping = 150;
+      } else if (isBlrOrHyd) {
         baseRate = 150;
         maxShipping = 250;
-      } else if (city === 'delhi' || city === 'mumbai' || city === 'kolkata') {
+      } else if (city.includes('delhi') || city.includes('mumbai') || city.includes('kolkata')) {
         baseRate = 200;
         maxShipping = 350;
       } else {
@@ -725,6 +734,9 @@
       shippingPrice = Math.min(calc, maxShipping);
 
       document.getElementById('shipping-val').textContent = '₹' + shippingPrice.toLocaleString('en-IN') + '.00';
+      if (staticMsg) {
+        staticMsg.innerHTML = '* Shipping charge: <span style="color: var(--gold); font-weight: 600;">₹' + shippingPrice.toLocaleString('en-IN') + '</span> (Max cap: ₹' + maxShipping + ') *';
+      }
       updateFinalTotal();
     }
 
